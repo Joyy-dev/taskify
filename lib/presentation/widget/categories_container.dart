@@ -23,14 +23,15 @@ class CategoriesContainer extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Icon(Icons.work),
-                const SizedBox(height: 5,),
+                Icon(Icons.work, color: Theme.of(context).colorScheme.onSecondary,),
+                const SizedBox(height: 20,),
                 Text(
-                  'Work'
+                  'Work',
+                  style: Theme.of(context).textTheme.displayMedium,
                 ),
-                const SizedBox(height: 5,),
                 Text(
-                  '12 Active Tasks'
+                  '12 Active Tasks',
+                  style: Theme.of(context).textTheme.bodySmall,
                 )
               ],
             ),
@@ -53,15 +54,15 @@ class CategoriesContainer extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Icon(Icons.person),
-                const SizedBox(height: 5,),
+                Icon(Icons.person, color: Theme.of(context).colorScheme.onSurface,),
+                const SizedBox(height: 20,),
                 Text(
                   'Personal',
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: Theme.of(context).textTheme.displayMedium,
                 ),
-                const SizedBox(height: 5,),
                 Text(
-                  '5 Active Tasks'
+                  '5 Active Tasks',
+                  style: Theme.of(context).textTheme.bodySmall,
                 )
               ],
             ),

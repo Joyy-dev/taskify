@@ -18,27 +18,33 @@ class AppTheme {
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       elevation: 1,
       backgroundColor: Colors.white,
-      unselectedIconTheme: IconThemeData(
-        color: Color(0xFFC8C5D2),
-        size: 20
-      ),
       selectedItemColor: Color(0xFF3323cc),
-      unselectedItemColor: Color(0xFFC8C5D2),
+      unselectedItemColor: Color(0xFF474650),
       type: BottomNavigationBarType.fixed,
+    ),
+
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: Color(0xFF3323cc),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(50)
+      ),
+      splashColor: Colors.white
     ),
 
     colorScheme: ColorScheme(
       brightness: Brightness.light, 
       primary: Color(0xFF3323cc), 
       onPrimary: Color(0xFFf2efff), 
-      secondary: Color(0xFFe2dfff), 
+      secondary: Color(0xFFc3c0ff), 
       onSecondary: Color(0xFF3323cc), 
       error: Colors.red, 
       onError: Colors.redAccent, 
       surface: Color(0xFF571f00), 
       onSurface: Color(0xFF505f76),
       outline: Color(0xFFc8c5d2),
-      onTertiary: Color(0xFFc8c5d2)
+      onTertiary: Color(0xFFc8c5d2),
+      onPrimaryContainer: Color(0xFF213145),
+      onSurfaceVariant: Colors.white
     ),
 
     cardColor: Colors.white,
@@ -54,7 +60,7 @@ class AppTheme {
       ),
       bodySmall: TextStyle(
         fontSize: 15,
-        color: Colors.black,
+        color: Color(0xFF777681),
         fontWeight: FontWeight.bold
       ),
       headlineLarge: TextStyle(
@@ -75,8 +81,13 @@ class AppTheme {
       displayLarge: TextStyle(
         fontSize: 18,
         color: Color(0xFFf3effc)
+      ),
+      displayMedium: TextStyle(
+        fontSize: 20,
+        color: Colors.black,
+        fontWeight: FontWeight.bold
       )
-    )
+    ),
   );
 
   static final darkMode = ThemeData(
@@ -99,6 +110,12 @@ class AppTheme {
       unselectedItemColor: Color(0xFFbec6e0),
       type: BottomNavigationBarType.fixed,
     ),
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: Color(0xFFa0a3ff),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(50)
+      ),
+    ),
     colorScheme: ColorScheme(
       brightness: Brightness.dark, 
       primary: Color(0xFF283044), 
@@ -108,9 +125,11 @@ class AppTheme {
       error: Colors.red, 
       onError: Color(0xFFffb783), 
       surface: Color(0xFF7c87f3), 
-      onSurface: Color(0xFFb95f00),
+      onSurface: Color(0xFFffb783),
       outline: Color(0xFFbec6e0),
-      onTertiary: Color(0xFF565e74)
+      onTertiary: Color(0xFF565e74),
+      onPrimaryContainer: Color(0xFF703700),
+      onSurfaceVariant: Color(0xFF131e8c)
     ),
 
     textTheme: TextTheme(
@@ -125,7 +144,7 @@ class AppTheme {
       ),
       bodySmall: TextStyle(
         fontSize: 15,
-        color: Color(0xFFeef0ff),
+        color: Color(0xFFa3abc4),
         fontWeight: FontWeight.bold
       ),
       headlineLarge: TextStyle(
@@ -146,6 +165,11 @@ class AppTheme {
       displayLarge: TextStyle(
         fontSize: 18,
         color: Color(0xFFa3abc4)
+      ),
+      displayMedium: TextStyle(
+        fontSize: 20,
+        color: Color(0xFFeef0ff),
+        fontWeight: FontWeight.bold
       )
     )
   );

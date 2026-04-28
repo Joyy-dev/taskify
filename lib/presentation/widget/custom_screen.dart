@@ -35,10 +35,16 @@ class CustomScreen extends StatelessWidget {
           )
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(Icons.add, color: Theme.of(context).colorScheme.onSurfaceVariant,),
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(15.0),
-          child: child,
+          child: SingleChildScrollView(
+            child: child
+          ),
         )
       ),
     );
