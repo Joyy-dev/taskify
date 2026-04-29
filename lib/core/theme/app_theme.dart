@@ -44,10 +44,36 @@ class AppTheme {
       outline: Color(0xFFc8c5d2),
       onTertiary: Color(0xFFc8c5d2),
       onPrimaryContainer: Color(0xFF213145),
-      onSurfaceVariant: Colors.white
+      onSurfaceVariant: Colors.white,
+      inverseSurface: Color(0xFFf2efff)
     ),
 
-    cardColor: Colors.white,
+    searchBarTheme: SearchBarThemeData(
+      backgroundColor: WidgetStatePropertyAll(Colors.white),
+      elevation: WidgetStatePropertyAll(0),
+      shape: WidgetStatePropertyAll(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        )
+      ),
+      side: WidgetStatePropertyAll(
+        BorderSide(
+          width: 1,
+          color: Color(0xFFc8c5d2)
+        )
+      ),
+      textStyle: WidgetStatePropertyAll(
+        TextStyle(
+          color: Color(0xFF505f76)
+        )
+      ),
+    ),
+
+    dividerTheme: DividerThemeData(
+      color: Color(0xFF777681),
+      thickness: 1
+    ),
+    
     textTheme: TextTheme(
       bodyLarge: TextStyle(
         fontSize: 18,
@@ -86,6 +112,20 @@ class AppTheme {
         fontSize: 20,
         color: Colors.black,
         fontWeight: FontWeight.bold
+      ),
+      displaySmall: TextStyle(
+        fontSize: 20,
+        color: Color(0xFFf3effc),
+        fontWeight: FontWeight.bold
+      ),
+      labelMedium: TextStyle(
+        fontSize: 20,
+        color: Color(0xFFf3effc),
+        fontWeight: FontWeight.bold
+      ),
+      labelSmall: TextStyle(
+        fontSize: 15,
+        color: Color(0xFFf3effc)
       )
     ),
   );
@@ -123,13 +163,39 @@ class AppTheme {
       secondary: Color(0xFF283044), 
       onSecondary: Color(0xFFa0a3ff), 
       error: Colors.red, 
-      onError: Color(0xFFffb783), 
+      onError: Colors.redAccent, 
       surface: Color(0xFF7c87f3), 
       onSurface: Color(0xFFffb783),
       outline: Color(0xFFbec6e0),
       onTertiary: Color(0xFF565e74),
       onPrimaryContainer: Color(0xFF703700),
-      onSurfaceVariant: Color(0xFF131e8c)
+      onSurfaceVariant: Color(0xFF131e8c),
+      inverseSurface: Colors.transparent
+    ),
+
+    dividerTheme: DividerThemeData(
+      color: Color(0xFF565e74),
+      thickness: 1
+    ),
+
+    searchBarTheme: SearchBarThemeData(
+      backgroundColor: WidgetStatePropertyAll(Colors.transparent),
+      shape: WidgetStatePropertyAll(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12)
+        )
+      ),
+      side: WidgetStatePropertyAll(
+        BorderSide(
+          width: 1,
+          color: Color(0xFF565e74)
+        )
+      ),
+      textStyle: WidgetStatePropertyAll(
+        TextStyle(
+          color: Color(0xFF283044)
+        )
+      )
     ),
 
     textTheme: TextTheme(
@@ -170,6 +236,20 @@ class AppTheme {
         fontSize: 20,
         color: Color(0xFFeef0ff),
         fontWeight: FontWeight.bold
+      ),
+      displaySmall: TextStyle(
+        fontSize: 20,
+        color: Color(0xFF283044),
+        fontWeight: FontWeight.bold
+      ),
+      labelMedium: TextStyle(
+        fontSize: 20,
+        color: Color(0xFFeef0ff),
+        fontWeight: FontWeight.bold
+      ),
+      labelSmall: TextStyle(
+        fontSize: 15,
+        color: Color(0xFF283044)
       )
     )
   );
