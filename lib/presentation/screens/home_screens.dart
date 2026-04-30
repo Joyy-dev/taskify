@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:taskify/presentation/screens/new_task_screen.dart';
 import 'package:taskify/presentation/widget/activity_progress.dart';
 import 'package:taskify/presentation/widget/categories_container.dart';
 import 'package:taskify/presentation/widget/custom_screen.dart';
@@ -18,6 +20,15 @@ class _HomeScreensState extends State<HomeScreens> {
   Widget build(BuildContext context) {
     return CustomScreen(
       title: 'Taskify', 
+      icon: Icons.grid_view_sharp,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Get.to(
+            () => NewTaskScreen()
+          );
+        },
+        child: Icon(Icons.add, color: Theme.of(context).colorScheme.onSurfaceVariant,),
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

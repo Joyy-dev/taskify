@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:taskify/presentation/screens/new_task_screen.dart';
 import 'package:taskify/presentation/widget/custom_screen.dart';
 import 'package:taskify/presentation/widget/progress_container.dart';
 import 'package:taskify/presentation/widget/search_and_filter.dart';
@@ -10,7 +12,16 @@ class TaskListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScreen(
-      title: 'Taskify', 
+      title: 'Taskify',
+      icon: Icons.grid_view_sharp,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Get.to(
+            () => NewTaskScreen()
+          );
+        },
+        child: Icon(Icons.add, color: Theme.of(context).colorScheme.onSurfaceVariant,),
+      ), 
       child: Column(
         children: [
           SearchAndFilter(),

@@ -73,6 +73,36 @@ class AppTheme {
       color: Color(0xFF777681),
       thickness: 1
     ),
+
+    cardTheme: CardThemeData(
+      color: Colors.white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(13),
+        side: BorderSide(
+          color: Color(0xFF68788f)
+        )
+      )
+    ),
+
+    iconButtonTheme: IconButtonThemeData(
+      style: ButtonStyle(
+        iconColor: WidgetStatePropertyAll(Color(0xFF68788f))
+      )
+    ),
+
+    datePickerTheme: DatePickerThemeData(
+      backgroundColor: Color(0xFFe4e1ee),
+      dayForegroundColor: WidgetStatePropertyAll(Color(0xFF1b1b24)),
+      cancelButtonStyle: ButtonStyle(
+        foregroundColor: WidgetStatePropertyAll(Color(0xFF1b1b24)),
+      ),
+      confirmButtonStyle: ButtonStyle(
+        foregroundColor: WidgetStatePropertyAll(Color(0xFF1b1b24))
+      ),
+      yearForegroundColor: WidgetStatePropertyAll(Color(0xFF1b1b24)),
+      headerForegroundColor: Color(0xFF1b1b24),
+      subHeaderForegroundColor: Color(0xFF5f5d68)
+    ),
     
     textTheme: TextTheme(
       bodyLarge: TextStyle(
@@ -176,6 +206,39 @@ class AppTheme {
     dividerTheme: DividerThemeData(
       color: Color(0xFF565e74),
       thickness: 1
+    ),
+
+    cardTheme: CardThemeData(
+      color: Colors.transparent,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(13),
+        side: BorderSide(
+          color: Color(0xFF565e74)
+        )
+      )
+    ),
+
+    datePickerTheme: DatePickerThemeData(
+      backgroundColor: Color(0xFF283044),
+      dayForegroundColor: WidgetStatePropertyAll(Color(0xFFeef0ff)),
+      headerForegroundColor: Color(0xFFa3abc4),
+      todayBackgroundColor: WidgetStatePropertyAll(Color(0xFFbdc2ff)),
+      todayForegroundColor: WidgetStatePropertyAll(Color(0xFF000767)),
+      yearForegroundColor: WidgetStatePropertyAll(Color(0xFFa3abc4)),
+      rangePickerHeaderForegroundColor: Color(0xFF283044),
+      subHeaderForegroundColor: Color(0xFF283044),
+      cancelButtonStyle: ButtonStyle(
+        foregroundColor: WidgetStatePropertyAll(Color(0xFFa3abc4))
+      ),
+      confirmButtonStyle: ButtonStyle(
+        foregroundColor: WidgetStatePropertyAll(Color(0xFFa3abc4))
+      )
+    ),
+
+    iconButtonTheme: IconButtonThemeData(
+      style: ButtonStyle(
+        iconColor: WidgetStatePropertyAll(Colors.white)
+      )
     ),
 
     searchBarTheme: SearchBarThemeData(
