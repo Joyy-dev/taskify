@@ -8,6 +8,7 @@ class TaskContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(17),
+      margin: EdgeInsets.symmetric(vertical: 10),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.inverseSurface,
         borderRadius: BorderRadius.circular(10),
@@ -22,10 +23,6 @@ class TaskContainer extends StatelessWidget {
             color: Color(0xFF283044)
           )
         ]
-        // border: Border.all(
-        //   width: 1,
-        //   color: Theme.of(context).colorScheme.outline
-        // )
       ),
       child: child,
     );

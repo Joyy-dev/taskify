@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_instance/src/extension_instance.dart';
+import 'package:get/route_manager.dart';
+import 'package:taskify/core/enums/priority_levels.dart';
 import 'package:taskify/core/services/date_picker.dart';
+import 'package:taskify/data/task_model.dart';
 import 'package:taskify/features/custom_form.dart';
 import 'package:taskify/features/priority_level.dart';
+import 'package:taskify/presentation/controllers/task_controllers.dart';
 
 class TaskForm extends StatefulWidget {
   const TaskForm({super.key});
@@ -12,15 +17,18 @@ class TaskForm extends StatefulWidget {
 
 class _TaskFormState extends State<TaskForm> {
   final _formKey = GlobalKey<FormState>();
+  final TaskControllers taskControllers = Get.find();
   final _taskNameController = TextEditingController();
   final _dueDateController = TextEditingController();
   final _descriptionController = TextEditingController();
   String selectedCategory = 'Work';
+  PriorityLevels? selectedPriority;
 
   @override
   void dispose() {
     _taskNameController.dispose();
     _dueDateController.dispose();
+    _descriptionController.dispose();
     super.dispose();
   }
 
@@ -30,8 +38,8 @@ class _TaskFormState extends State<TaskForm> {
     if (pickedDate != null) {
       setState(() {
         _dueDateController.text = 
-        '${pickedDate.day.toString().padLeft(2, '0')}/';
-        '${pickedDate.month.toString().padLeft(2, '0')}/';
+        '${pickedDate.day.toString().padLeft(2, '0')}/'
+        '${pickedDate.month.toString().padLeft(2, '0')}/'
         '${pickedDate.year}';
       });
     }
@@ -94,7 +102,11 @@ class _TaskFormState extends State<TaskForm> {
             ),
           ),
           const SizedBox(height: 25,),
-          PriorityLevel(),
+          PriorityLevel(
+            onSelected: (level) {
+              selectedPriority = level;
+            },
+          ),
           const SizedBox(height: 25,),
           CustomForm(
             tag: 'Description',
@@ -111,7 +123,30 @@ class _TaskFormState extends State<TaskForm> {
               color: Theme.of(context).colorScheme.onSecondary
             ),
             child: ElevatedButton(
-              onPressed: () {}, 
+              onPressed: () {
+                final task = TaskModel(
+                  id: 'T1', 
+                  title: _taskNameController.text, 
+                  category: selectedCategory, 
+                  description: _descriptionController.text, 
+                  dueDate: _dueDateController.text, 
+                  priority: selectedPriority?.name ?? 'low',
+                );
+                taskControllers.addTask(task);
+                taskControllers.saveAndClose();
+                Get.snackbar(
+                  'Success', 
+                  'Task Added successfully',
+                  snackPosition: SnackPosition.TOP
+                );
+                _taskNameController.clear();
+                _descriptionController.clear();
+                _dueDateController.clear();
+                selectedPriority = null;
+                selectedCategory = 'Work';
+                setState(() {});
+                
+              }, 
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.transparent,
                 shadowColor: Colors.transparent

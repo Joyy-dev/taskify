@@ -226,6 +226,7 @@ class AppTheme {
       todayForegroundColor: WidgetStatePropertyAll(Color(0xFF000767)),
       yearForegroundColor: WidgetStatePropertyAll(Color(0xFFa3abc4)),
       rangePickerHeaderForegroundColor: Color(0xFF283044),
+      rangeSelectionBackgroundColor: Color(0xFFa3abc4),
       subHeaderForegroundColor: Color(0xFF283044),
       cancelButtonStyle: ButtonStyle(
         foregroundColor: WidgetStatePropertyAll(Color(0xFFa3abc4))

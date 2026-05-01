@@ -1,16 +1,17 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:taskify/core/enums/priority_levels.dart';
 import 'package:taskify/core/services/category_color.dart';
 
 class PriorityLevel extends StatefulWidget {
-  const PriorityLevel({super.key});
+  final Function(PriorityLevels) onSelected;
+  const PriorityLevel({required this.onSelected, super.key});
 
   @override
   State<PriorityLevel> createState() => _PriorityLevelState();
 }
 
 class _PriorityLevelState extends State<PriorityLevel> {
+  
   PriorityLevels? selectedLevel;
 
   Widget buildItem(String label, PriorityLevels level) {
@@ -23,6 +24,7 @@ class _PriorityLevelState extends State<PriorityLevel> {
           setState(() {
             selectedLevel = level;
           });
+          widget.onSelected(level);
         },
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 13, horizontal: 7),
@@ -38,10 +40,7 @@ class _PriorityLevelState extends State<PriorityLevel> {
           child: Text(
             label,
             textAlign: TextAlign.center,
-            style: TextStyle(
-              color: isSelected ? color : null,
-              fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-            ),
+            style: Theme.of(context).textTheme.displayMedium,
           ),
         ),
       ),

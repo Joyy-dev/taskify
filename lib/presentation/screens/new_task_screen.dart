@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:taskify/features/task_form.dart';
 import 'package:taskify/presentation/widget/custom_screen.dart';
 
@@ -9,7 +10,10 @@ class NewTaskScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomScreen(
       title: 'Taskify', 
-      icon: Icons.arrow_back,
+      icons: IconButton(
+        onPressed: () => Get.back(), 
+        icon: Icon(Icons.arrow_back)
+      ),
       child: Column(
         children: [
           Text(
