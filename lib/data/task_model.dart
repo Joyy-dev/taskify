@@ -1,10 +1,12 @@
+import 'package:taskify/core/enums/priority_levels.dart';
+
 class TaskModel {
   final String id;
   final String title;
   final String category;
   final String description;
   final String dueDate;
-  final String priority;
+  final PriorityLevels priority;
 
   const TaskModel({
     required this.id,

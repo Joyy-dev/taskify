@@ -130,7 +130,7 @@ class _TaskFormState extends State<TaskForm> {
                   category: selectedCategory, 
                   description: _descriptionController.text, 
                   dueDate: _dueDateController.text, 
-                  priority: selectedPriority?.name ?? 'low',
+                  priority: selectedPriority ?? PriorityLevels.low,
                 );
                 taskControllers.addTask(task);
                 taskControllers.saveAndClose();
