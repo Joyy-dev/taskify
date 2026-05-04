@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/get_core.dart';
 import 'package:taskify/presentation/controllers/navigation_controllers.dart';
 import 'package:taskify/presentation/screens/home_screens.dart';
 import 'package:taskify/presentation/screens/task_list_screen.dart';
