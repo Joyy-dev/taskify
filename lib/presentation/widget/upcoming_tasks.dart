@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:get/instance_manager.dart';
+import 'package:get/get.dart';
 import 'package:taskify/core/services/category_color.dart';
 import 'package:taskify/presentation/controllers/task_controllers.dart';
+import 'package:taskify/presentation/screens/task_detail_screens.dart';
 import 'package:taskify/presentation/widget/progress_container.dart';
 import 'package:taskify/presentation/widget/search_and_filter.dart';
 import 'package:taskify/presentation/widget/task_container.dart';
@@ -26,7 +26,7 @@ class UpcomingTasks extends StatelessWidget {
         ),
         const SizedBox(height: 10,),
         SizedBox(
-          height: 700,
+          height: 540,
           child: ListView.builder(
             itemCount: controllers.tasks.length,
             itemBuilder: (context, index) {
@@ -34,8 +34,7 @@ class UpcomingTasks extends StatelessWidget {
               final priorityColor = getLevelColor(context, task.priority);
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  
+                children: [                
                   TaskContainer(
                     priority: task.priority,
                     child: Column(
@@ -61,9 +60,14 @@ class UpcomingTasks extends StatelessWidget {
                         )
                       ],
                     ),
-                    Text(
-                      task.title,
-                      style: Theme.of(context).textTheme.headlineMedium,
+                    GestureDetector(
+                      onTap: () {
+                        Get.to(() => TaskDetailScreens());
+                      },
+                      child: Text(
+                        task.title,
+                        style: Theme.of(context).textTheme.headlineMedium,
+                      ),
                     ),
                     const SizedBox(height: 5,),
                     Text(

@@ -32,6 +32,7 @@ class TaskListScreen extends StatelessWidget {
         if (controllers.tasks.isEmpty) {
           return Center(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(Icons.takeout_dining_sharp),
                 Text(

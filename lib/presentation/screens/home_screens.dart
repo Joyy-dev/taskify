@@ -32,43 +32,45 @@ class _HomeScreensState extends State<HomeScreens> {
         },
         child: Icon(Icons.add, color: Theme.of(context).colorScheme.onSurfaceVariant,),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          FocusContainer(),
-          const SizedBox(height: 25,),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Categories',
-                style: Theme.of(context).textTheme.headlineMedium,
-              ),
-              IconButton(
-                onPressed: () {}, 
-                icon: Icon(Icons.add, color: Theme.of(context).colorScheme.onSecondary,)
-              )
-            ],
-          ),
-          const SizedBox(height: 10,),
-          CategoriesContainer(),
-          const SizedBox(height: 45,),
-          ActivityProgress(),
-          const SizedBox(height: 30,),
-          Text(
-            'Upcoming Deadlines',
-            style: Theme.of(context).textTheme.headlineMedium,
-          ),
-          const SizedBox(height: 10,),
-          UpcomingDeadline(),
-          const SizedBox(height: 30,),
-          Text(
-            'Smart Insights',
-            style: Theme.of(context).textTheme.headlineMedium,
-          ),
-          const SizedBox(height: 10,),
-          Insights()
-        ],
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            FocusContainer(),
+            const SizedBox(height: 25,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Categories',
+                  style: Theme.of(context).textTheme.headlineMedium,
+                ),
+                IconButton(
+                  onPressed: () {}, 
+                  icon: Icon(Icons.add, color: Theme.of(context).colorScheme.onSecondary,)
+                )
+              ],
+            ),
+            const SizedBox(height: 10,),
+            CategoriesContainer(),
+            const SizedBox(height: 45,),
+            ActivityProgress(),
+            const SizedBox(height: 30,),
+            Text(
+              'Upcoming Deadlines',
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+            const SizedBox(height: 10,),
+            UpcomingDeadline(),
+            const SizedBox(height: 30,),
+            Text(
+              'Smart Insights',
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+            const SizedBox(height: 10,),
+            Insights()
+          ],
+        ),
       )
     );
   }

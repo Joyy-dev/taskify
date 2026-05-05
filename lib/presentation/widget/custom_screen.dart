@@ -41,9 +41,7 @@ class CustomScreen extends StatelessWidget {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(15.0),
-          child: SingleChildScrollView(
-            child: child
-          ),
+          child: child,
         )
       ),
     );
