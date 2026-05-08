@@ -43,7 +43,7 @@ class TaskFormControllers extends GetxController{
   void saveTask() {
     final task = TaskModel(
       id: 'T1', 
-      title: taskNameController.text, 
+      taskTitle: taskNameController.text, 
       category: selectedCategory.value, 
       description: descriptionController.text, 
       dueDate: dueDateController.text, 
@@ -84,6 +84,5 @@ class TaskFormControllers extends GetxController{
       snackPosition: SnackPosition.TOP
     );
     clearForm();
-    
   }
 }

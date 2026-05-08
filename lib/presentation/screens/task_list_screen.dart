@@ -8,12 +8,12 @@ import 'package:taskify/presentation/widget/custom_screen.dart';
 import 'package:taskify/presentation/widget/upcoming_tasks.dart';
 
 class TaskListScreen extends StatelessWidget {
-  const TaskListScreen({super.key});
+  TaskListScreen({super.key});
+
+  final TaskControllers controllers = Get.find();
 
   @override
   Widget build(BuildContext context) {
-    final TaskControllers controllers = Get.find();
-
     return CustomScreen(
       title: 'Taskify',
       icons: IconButton(
@@ -34,9 +34,12 @@ class TaskListScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.takeout_dining_sharp),
+                Icon(Icons.takeout_dining_sharp, size: 50,),
+                const SizedBox(height: 5,),
                 Text(
-                  'oops!!!!! You don\'t have any upcoming task'
+                  'oops!!!!! You don\'t have any upcoming task. Add new Task',
+                  style: Theme.of(context).textTheme.bodyMedium,
+                  textAlign: TextAlign.center,
                 ),
                 TextButton(
                   onPressed: () {
@@ -44,7 +47,10 @@ class TaskListScreen extends StatelessWidget {
                       () => NewTaskScreen()
                     );
                   }, 
-                  child: Text('Create New Task')
+                  child: Text(
+                    'Create New Task',
+                    style: Theme.of(context).textTheme.displayMedium,
+                  )
                 )
               ],
             ),

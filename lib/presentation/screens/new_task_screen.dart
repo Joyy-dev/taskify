@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:taskify/features/task_form.dart';
+import 'package:taskify/presentation/controllers/task_form_controllers.dart';
 import 'package:taskify/presentation/widget/custom_screen.dart';
 
 class NewTaskScreen extends StatelessWidget {
-  const NewTaskScreen({super.key});
+  NewTaskScreen({super.key});
+
+  final TaskFormControllers controllers = Get.put(TaskFormControllers());
 
   @override
   Widget build(BuildContext context) {

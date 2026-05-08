@@ -20,7 +20,7 @@ class TaskControllers extends GetxController{
   void saveTask() {
     box.write('tasks', tasks.map((e) => {
       'id': e.id,
-      'title': e.title,
+      'title': e.taskTitle,
       'category': e.category,
       'description': e.description,
       'dueDate': e.dueDate,
@@ -33,7 +33,7 @@ class TaskControllers extends GetxController{
     if (data != null) {
       tasks.value = List<Map<String, dynamic>>.from(data).map((e) => TaskModel(
         id: e['id'], 
-        title: e['title'], 
+        taskTitle: e['title'], 
         category: e['category'], 
         description: e['description'], 
         dueDate: e['duedate'], 

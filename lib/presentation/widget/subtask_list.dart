@@ -1,0 +1,37 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:taskify/presentation/controllers/task_detail_controllers.dart';
+
+class SubtaskList extends StatelessWidget {
+  const SubtaskList({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final TaskDetailControllers controllers = Get.find();
+    return Obx(() {
+      final task = controllers.tasks.value;
+      return SizedBox(
+        height: 200,
+        child: ListView.builder(
+          itemCount: task!.subTask.length,
+          itemBuilder: (context, index) {
+            final task = controllers.tasks.value!;
+            //final completed = controllers.completedCount;
+            final subtask = task.subTask[index];
+            return Container(
+              decoration: BoxDecoration(
+                color:  Colors.transparent
+              ),
+              child: Row(
+                children: [
+                  Icon(subtask.isDone ? Icons.check_box_outlined : Icons.check_box_outline_blank),
+                  Text(subtask.title)
+                ],
+              ),
+            );
+          },
+        ),
+      );
+    });
+  }
+}
