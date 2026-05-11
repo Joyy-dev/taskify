@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:get/instance_manager.dart';
+import 'package:taskify/data/task_model.dart';
 import 'package:taskify/features/subtasks.dart';
+import 'package:taskify/presentation/controllers/task_detail_controllers.dart';
 import 'package:taskify/presentation/widget/custom_screen.dart';
 
 class TaskDetailScreens extends StatelessWidget {
-  final String title;
-  final String description;
+  final TaskModel task;
 
-  const TaskDetailScreens({required this.title, required this.description, super.key});
+  TaskDetailScreens({required this.task, super.key});
+
+  final TaskDetailControllers controllers = Get.find();
 
   @override
   Widget build(BuildContext context) {
+    controllers.setTask(task);
     return CustomScreen(
       title: 'Taskify', 
       child: SingleChildScrollView(
@@ -29,12 +34,12 @@ class TaskDetailScreens extends StatelessWidget {
             ),
             const SizedBox(height: 15,),
             Text(
-              title,
+              task.taskTitle,
               style: Theme.of(context).textTheme.headlineMedium,
             ),
             const SizedBox(height: 20,),
             Text(
-              description,
+              task.description,
               style: Theme.of(context).textTheme.bodyMedium,
             ),
             const SizedBox(height: 30,),

@@ -13,7 +13,7 @@ class Subtasks extends StatelessWidget {
   Widget build(BuildContext context) {
     
     return Container(
-      height: 200,
+      height: 400,
       padding: EdgeInsets.all(15),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.primaryContainer,

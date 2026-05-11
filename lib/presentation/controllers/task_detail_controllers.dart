@@ -16,8 +16,8 @@ class TaskDetailControllers extends GetxController{
     if (currentTask == null) return;
     final subTask = currentTask.subTask[index];
     subTask.isDone = !subTask.isDone;
-    tasks.value = currentTask;
-    //tasks.refresh();
+    //tasks.value = currentTask;
+    tasks.refresh();
   }
 
   void addSubtask(String title) {
@@ -26,7 +26,8 @@ class TaskDetailControllers extends GetxController{
     if (currentTask == null) return;
     if (title.trim().isEmpty) return;
     currentTask.subTask.add(SubtaskModel(title: title));
-    tasks.value = currentTask;
+    //tasks.value = currentTask;
+    tasks.refresh();
   }
 
   int get completedCount {

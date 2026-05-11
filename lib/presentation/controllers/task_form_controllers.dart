@@ -33,6 +33,8 @@ class TaskFormControllers extends GetxController{
     );
 
     if (pickedDate != null) {
+      selectedDate.value = pickedDate;
+
       dueDateController.text = 
       '${pickedDate.day.toString().padLeft(2, '0')}/'
       '${pickedDate.month.toString().padLeft(2, '0')}/'
@@ -41,8 +43,10 @@ class TaskFormControllers extends GetxController{
   }
 
   void saveTask() {
+    if (!formKey.currentState!.validate()) return;
+
     final task = TaskModel(
-      id: 'T1', 
+      id: DateTime.now().millisecondsSinceEpoch.toString(), 
       taskTitle: taskNameController.text, 
       category: selectedCategory.value, 
       description: descriptionController.text, 
@@ -79,8 +83,8 @@ class TaskFormControllers extends GetxController{
   void onCancel() {
     taskControllers.saveAndClose();
     Get.snackbar(
-      'Delete Task',
-      'You have successfully deleted your task',
+      'Cancelled',
+      'Task creation cancelled',
       snackPosition: SnackPosition.TOP
     );
     clearForm();

@@ -66,8 +66,7 @@ class UpcomingTasks extends StatelessWidget {
                     GestureDetector(
                       onTap: () {
                         Get.to(() => TaskDetailScreens(
-                          title: task.taskTitle,
-                          description: task.description,
+                          task: task
                         ));
                       },
                       child: Text(

@@ -17,6 +17,6 @@ class TaskModel {
     required this.description,
     required this.dueDate,
     required this.priority,
-    this.subTask = const []
-  });
+    List<SubtaskModel>? subTask,
+  }) : subTask = subTask ?? [];
 }
