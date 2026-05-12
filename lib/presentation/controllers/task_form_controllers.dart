@@ -27,7 +27,7 @@ class TaskFormControllers extends GetxController{
 
     DateTime? pickedDate = await showDatePicker(
       context: context, 
-      initialDate: DateTime.now(),
+      initialDate: selectedDate.value ?? DateTime.now(),
       firstDate: DateTime(2000), 
       lastDate: DateTime(2030)
     );
@@ -50,8 +50,9 @@ class TaskFormControllers extends GetxController{
       taskTitle: taskNameController.text, 
       category: selectedCategory.value, 
       description: descriptionController.text, 
-      dueDate: dueDateController.text, 
+      dueDate: selectedDate.value ?? DateTime.now(), 
       priority: selectedPriority.value ?? PriorityLevels.low,
+      reminderTime: TimeOfDay.now()
     );
     taskControllers.addTask(task);
     taskControllers.saveAndClose();

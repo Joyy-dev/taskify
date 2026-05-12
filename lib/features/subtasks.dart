@@ -11,31 +11,46 @@ class Subtasks extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
+    final completed = controllers.completedCount;
     return Container(
-      height: 400,
+      height: 350,
       padding: EdgeInsets.all(15),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.primaryContainer,
+        color: Theme.of(context).colorScheme.inverseSurface,
         borderRadius: BorderRadius.circular(15),
+        boxShadow: [
+          BoxShadow(
+            color: Color(0xFF283044)
+          )
+        ]
       ),
       child: Column(
         children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
                 children: [
-                  Icon(Icons.checklist_sharp, color: Theme.of(context).colorScheme.inversePrimary, size: 35,),
+                  Icon(
+                    Icons.checklist_sharp, 
+                    color: Theme.of(context).colorScheme.surface, 
+                    size: 30
+                  ),
                   const SizedBox(width: 10,),
                   Text(
                     'Subtasks',
-                    style: Theme.of(context).textTheme.headlineLarge,
+                    style: Theme.of(context).textTheme.headlineMedium,
                   )
                 ],
+              ),
+              Text(
+                '$completed completed' 
               )
             ],
           ),
-          const SizedBox(height: 20,),
+          const SizedBox(height: 10,),
+          Divider(thickness: 0.5,),
+          const SizedBox(height: 10,),
           Expanded(
             child: Obx(() {
               final task = controllers.tasks.value;
@@ -50,7 +65,7 @@ class Subtasks extends StatelessWidget {
               }
             }),
           ),
-          const SizedBox(height: 30,),
+          const SizedBox(height: 20,),
           Container(
             decoration: BoxDecoration(
               color: Colors.transparent,
@@ -61,11 +76,11 @@ class Subtasks extends StatelessWidget {
               )
             ),
             child: TextButton(
-              onPressed: controllers.showAddSubtaskDialog,
+              onPressed: () => controllers.showAddSubtaskDialog(context),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.add, color: Theme.of(context).colorScheme.onPrimary, size: 25,),
+                  Icon(Icons.add, color: Theme.of(context).colorScheme.surface, size: 25,),
                   const SizedBox(width: 10,),
                   Text(
                     'Add Subtask',

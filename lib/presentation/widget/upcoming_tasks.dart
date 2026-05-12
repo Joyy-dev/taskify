@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:taskify/core/services/category_color.dart';
 import 'package:taskify/presentation/controllers/task_controllers.dart';
-import 'package:taskify/presentation/controllers/task_form_controllers.dart';
 import 'package:taskify/presentation/screens/task_detail_screens.dart';
 import 'package:taskify/presentation/widget/progress_container.dart';
 import 'package:taskify/presentation/widget/search_and_filter.dart';
@@ -10,8 +10,6 @@ import 'package:taskify/presentation/widget/task_container.dart';
 
 class UpcomingTasks extends StatelessWidget {
   UpcomingTasks({super.key});
-
-  final TaskFormControllers controller = Get.put(TaskFormControllers());
 
   @override
   Widget build(BuildContext context) {
@@ -88,12 +86,11 @@ class UpcomingTasks extends StatelessWidget {
                           'team'
                         ),
                         Text(
-                          task.dueDate,
+                          DateFormat('MMM dd').format(task.dueDate),
                           style: Theme.of(context).textTheme.bodySmall,
                         )
                       ],
                     )
-                    //const SizedBox(height: 10,)
                   ],
                     )
                   ),

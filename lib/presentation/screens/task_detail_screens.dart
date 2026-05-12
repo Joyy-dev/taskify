@@ -4,6 +4,8 @@ import 'package:taskify/data/task_model.dart';
 import 'package:taskify/features/subtasks.dart';
 import 'package:taskify/presentation/controllers/task_detail_controllers.dart';
 import 'package:taskify/presentation/widget/custom_screen.dart';
+import 'package:taskify/presentation/widget/priority_preview.dart';
+import 'package:taskify/presentation/widget/pro_tip.dart';
 
 class TaskDetailScreens extends StatelessWidget {
   final TaskModel task;
@@ -44,6 +46,10 @@ class TaskDetailScreens extends StatelessWidget {
             ),
             const SizedBox(height: 30,),
             Subtasks(),
+            const SizedBox(height: 20,),
+            PriorityPreview(),
+            const SizedBox(height: 30,),
+            ProTip()
           ],
         ),
       )

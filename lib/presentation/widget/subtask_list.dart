@@ -22,11 +22,16 @@ class SubtaskList extends StatelessWidget {
             child: Row(
               children: [
                 IconButton(
-                  onPressed: () =>controllers.toggleSubtask(index), 
+                  onPressed: () => controllers.toggleSubtask(index), 
                   icon: Icon(subtask.isDone ? Icons.check_box_outlined : Icons.check_box_outline_blank)
                 ),
-                //Icon(subtask.isDone ? ),
-                Text(subtask.title)
+                Text(
+                  subtask.title,
+                  style: TextStyle(
+                    decoration: subtask.isDone ? TextDecoration.lineThrough : TextDecoration.none,
+                    decorationThickness: 5
+                  ),
+                )
               ],
             ),
           );

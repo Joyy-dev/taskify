@@ -18,7 +18,7 @@ class ProgressContainer extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'In Progress',
+                  'Work',
                   style: Theme.of(context).textTheme.displaySmall,
                 ),
                 const SizedBox(height: 5,),
@@ -42,37 +42,13 @@ class ProgressContainer extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Due Today',
+                  'Personal',
                   style: Theme.of(context).textTheme.labelMedium,
                 ),
                 const SizedBox(height: 5,),
                 Text(
                   '4',
                   style: Theme.of(context).textTheme.bodySmall,
-                )
-              ],
-            ),
-          ),
-        ),
-        const SizedBox(width: 10,),
-        Expanded(
-          child: Container(
-            padding: EdgeInsets.all(12.0),
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.onSurface,
-              borderRadius: BorderRadius.circular(15)
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Upcoming',
-                  style: Theme.of(context).textTheme.displaySmall,
-                ),
-                const SizedBox(height: 5,),
-                Text(
-                  '5',
-                  style: Theme.of(context).textTheme.labelSmall,
                 )
               ],
             ),

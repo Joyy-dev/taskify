@@ -24,7 +24,8 @@ class TaskControllers extends GetxController{
       'category': e.category,
       'description': e.description,
       'dueDate': e.dueDate,
-      'priority': e.priority
+      'priority': e.priority,
+      'reminderTime': e.reminderTime
     }).toList());
   }
 
@@ -37,7 +38,8 @@ class TaskControllers extends GetxController{
         category: e['category'], 
         description: e['description'], 
         dueDate: e['duedate'], 
-        priority: e['priority']
+        priority: e['priority'],
+        reminderTime: e['reminderTime']
       )).toList();
     }
   }

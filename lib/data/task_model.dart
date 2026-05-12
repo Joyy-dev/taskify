@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:taskify/core/enums/priority_levels.dart';
 import 'package:taskify/data/subtask_model.dart';
 
@@ -6,7 +7,8 @@ class TaskModel {
   final String taskTitle;
   final String category;
   final String description;
-  final String dueDate;
+  DateTime dueDate;
+  TimeOfDay reminderTime;
   final PriorityLevels priority;
   final  List <SubtaskModel> subTask;
 
@@ -16,6 +18,7 @@ class TaskModel {
     required this.category,
     required this.description,
     required this.dueDate,
+    required this.reminderTime,
     required this.priority,
     List<SubtaskModel>? subTask,
   }) : subTask = subTask ?? [];

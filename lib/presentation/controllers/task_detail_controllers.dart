@@ -5,6 +5,7 @@ import 'package:taskify/data/task_model.dart';
 
 class TaskDetailControllers extends GetxController{
   var tasks = Rxn<TaskModel>();
+  RxList<TaskModel> task = <TaskModel>[].obs;
 
   void setTask(TaskModel taskData) {
     tasks.value = taskData;
@@ -26,7 +27,6 @@ class TaskDetailControllers extends GetxController{
     if (currentTask == null) return;
     if (title.trim().isEmpty) return;
     currentTask.subTask.add(SubtaskModel(title: title));
-    //tasks.value = currentTask;
     tasks.refresh();
   }
 
@@ -37,25 +37,61 @@ class TaskDetailControllers extends GetxController{
     return currentTask.subTask.where((s) => s.isDone).length;
   }
 
-  void showAddSubtaskDialog() {
+  void showAddSubtaskDialog(BuildContext context) {
     final textController = TextEditingController();
 
     Get.defaultDialog(
+      radius: 10,
+      backgroundColor: Theme.of(context).colorScheme.onTertiary,
       title: 'Add New Subtask',
-      content: TextField(
-        controller: textController,
-        decoration: InputDecoration(
-          hintText: 'Enter subtask title'
+      titlePadding: EdgeInsets.symmetric(vertical: 10),
+      titleStyle: Theme.of(context).textTheme.displayMedium,
+      content: Card(
+        child: TextField(
+          controller: textController,
+          decoration: InputDecoration(
+            contentPadding: EdgeInsets.symmetric(horizontal: 10),
+            hintText: 'Enter subtask title',
+            hintStyle: Theme.of(context).textTheme.bodyMedium,
+            border: InputBorder.none
+          ),
         ),
       ),
       textConfirm: 'Add',
+      cancelTextColor: Theme.of(context).colorScheme.primary,
       onConfirm: () {
         addSubtask(textController.text);
         Get.back();
       },
       onCancel: () {
-        Get.back();
+        Get.close(0);
       },
+    );
+  }
+
+  Future<void> selectReminderTime(BuildContext context) async {
+    final pickedTime = await showTimePicker(
+      context: context, 
+      initialTime: tasks.value!.reminderTime
+    );
+
+    if (pickedTime != null) {
+      tasks.value!.reminderTime = pickedTime;
+      tasks.refresh();
+    }
+  }
+
+  void confirmDeleteTask(String tasks) {
+    Get.defaultDialog(
+      title: 'Delete Task',
+      middleText: 'Are you sure you want to delete this task?',
+      textConfirm: 'Delete',
+      textCancel: 'Cancel',
+      onConfirm: () {
+        task.removeWhere((task) => task.id == tasks);
+        Get.back();
+        Get.back();
+      } 
     );
   }
 }
