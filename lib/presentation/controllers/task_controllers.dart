@@ -1,5 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:taskify/core/enums/priority_levels.dart';
+import 'package:taskify/data/subtask_model.dart';
 import 'package:taskify/data/task_model.dart';
 
 class TaskControllers extends GetxController{
@@ -23,9 +26,11 @@ class TaskControllers extends GetxController{
       'title': e.taskTitle,
       'category': e.category,
       'description': e.description,
-      'dueDate': e.dueDate,
-      'priority': e.priority,
-      'reminderTime': e.reminderTime
+      'dueDate': e.dueDate.toIso8601String(),
+      'priority': e.priority.name,
+      'subTask': e.subTask.map((s) => s.toJson()).toList(),
+      'reminderHour': e.reminderTime.hour,
+      'reminderMinute': e.reminderTime.minute
     }).toList());
   }
 
@@ -37,14 +42,37 @@ class TaskControllers extends GetxController{
         taskTitle: e['title'], 
         category: e['category'], 
         description: e['description'], 
-        dueDate: e['duedate'], 
-        priority: e['priority'],
-        reminderTime: e['reminderTime']
+        dueDate: DateTime.parse(e['dueDate']), 
+        subTask: List<Map<String, dynamic>>.from(e['subTask'] ?? []).map((s) => SubtaskModel.fromJson(e)).toList(),
+        priority: PriorityLevels.values.firstWhere((p) => p.name == e['priority']),
+        reminderTime: TimeOfDay(hour: e['reminderHour'], minute: e['reminderMinute'])
       )).toList();
     }
   }
 
-  void saveAndClose() {
-    Get.back();
+  void updateTask() {
+    saveTask();
+    tasks.refresh();
+  }
+
+  void deleteTask(String taskId) {
+    tasks.removeWhere((task) => task.id == taskId);
+    saveTask();
+  }
+
+  void confirmDeleteTask(BuildContext context, String taskId) {
+    Get.defaultDialog(
+      backgroundColor: Theme.of(context).colorScheme.onTertiary,
+      titleStyle: Theme.of(context).textTheme.displayMedium,
+      title: 'Delete Task',
+      middleText: 'Are you sure you want to delete this task?',
+      textConfirm: 'Delete',
+      textCancel: 'Cancel',
+      onConfirm: () {
+        deleteTask(taskId);
+        Get.back();
+        Get.back();
+      } 
+    );
   }
 }

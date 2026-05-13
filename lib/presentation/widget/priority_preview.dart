@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:taskify/features/priority_level.dart';
+import 'package:taskify/presentation/controllers/task_controllers.dart';
 import 'package:taskify/presentation/controllers/task_detail_controllers.dart';
 import 'package:taskify/presentation/controllers/task_form_controllers.dart';
 
@@ -12,10 +13,12 @@ class PriorityPreview extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.find<TaskFormControllers>();
     final controllers = Get.find<TaskDetailControllers>();
-    final task = controllers.tasks.value;
+    final cont = Get.find<TaskControllers>();
+
+    final task = controllers.selectedTask.value;
 
     return Container(
-      padding: EdgeInsets.all(10),
+      padding: EdgeInsets.all(15),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.inverseSurface,
         borderRadius: BorderRadius.circular(15),
@@ -26,7 +29,13 @@ class PriorityPreview extends StatelessWidget {
         ]
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Text(
+            'Priority'.toUpperCase(),
+            style: Theme.of(context).textTheme.bodySmall,
+          ),
+          const SizedBox(height: 10,),
           PriorityLevel(
             onSelected: (value) {
               controller.selectedPriority.value = value;
@@ -91,7 +100,7 @@ class PriorityPreview extends StatelessWidget {
           const SizedBox(height: 10,),
           ElevatedButton(
             onPressed: () {
-              controllers.confirmDeleteTask(task.id);
+              cont.confirmDeleteTask(context, task.id);
             }, 
             style: ElevatedButton.styleFrom(
               backgroundColor: Theme.of(context).colorScheme.error,

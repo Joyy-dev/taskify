@@ -2,39 +2,54 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:taskify/data/subtask_model.dart';
 import 'package:taskify/data/task_model.dart';
+import 'package:taskify/presentation/controllers/task_controllers.dart';
 
 class TaskDetailControllers extends GetxController{
-  var tasks = Rxn<TaskModel>();
-  RxList<TaskModel> task = <TaskModel>[].obs;
+  final selectedTask = Rxn<TaskModel>();
+  final TaskControllers controllers = Get.find();
 
   void setTask(TaskModel taskData) {
-    tasks.value = taskData;
+    selectedTask.value = taskData;
   }
 
   void toggleSubtask(int index) {
-    final currentTask = tasks.value;
+    final currentTask = selectedTask.value;
 
     if (currentTask == null) return;
     final subTask = currentTask.subTask[index];
     subTask.isDone = !subTask.isDone;
-    //tasks.value = currentTask;
-    tasks.refresh();
+    selectedTask.refresh();
+    controllers.saveTask();
   }
 
   void addSubtask(String title) {
-    final currentTask = tasks.value;
+    final currentTask = selectedTask.value;
 
     if (currentTask == null) return;
     if (title.trim().isEmpty) return;
     currentTask.subTask.add(SubtaskModel(title: title));
-    tasks.refresh();
+    selectedTask.refresh();
+    controllers.saveTask();
   }
 
   int get completedCount {
-    final currentTask = tasks.value;
+    final currentTask = selectedTask.value;
 
     if (currentTask == null) return 0;
     return currentTask.subTask.where((s) => s.isDone).length;
+  }
+
+  Future<void> selectReminderTime(BuildContext context) async {
+    final pickedTime = await showTimePicker(
+      context: context, 
+      initialTime: selectedTask.value!.reminderTime
+    );
+
+    if (pickedTime != null) {
+      selectedTask.value!.reminderTime = pickedTime;
+      selectedTask.refresh();
+      controllers.saveTask();
+    }
   }
 
   void showAddSubtaskDialog(BuildContext context) {
@@ -62,36 +77,11 @@ class TaskDetailControllers extends GetxController{
       onConfirm: () {
         addSubtask(textController.text);
         Get.back();
+        //textController.dispose();
       },
       onCancel: () {
-        Get.close(0);
+        Get.back();
       },
-    );
-  }
-
-  Future<void> selectReminderTime(BuildContext context) async {
-    final pickedTime = await showTimePicker(
-      context: context, 
-      initialTime: tasks.value!.reminderTime
-    );
-
-    if (pickedTime != null) {
-      tasks.value!.reminderTime = pickedTime;
-      tasks.refresh();
-    }
-  }
-
-  void confirmDeleteTask(String tasks) {
-    Get.defaultDialog(
-      title: 'Delete Task',
-      middleText: 'Are you sure you want to delete this task?',
-      textConfirm: 'Delete',
-      textCancel: 'Cancel',
-      onConfirm: () {
-        task.removeWhere((task) => task.id == tasks);
-        Get.back();
-        Get.back();
-      } 
     );
   }
 }

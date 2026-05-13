@@ -54,6 +54,30 @@ class ProgressContainer extends StatelessWidget {
             ),
           ),
         ),
+        const SizedBox(width: 10,),
+        Expanded(
+          child: Container(
+            padding: EdgeInsets.all(12.0),
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.surface,
+              borderRadius: BorderRadius.circular(15)
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Team',
+                  style: Theme.of(context).textTheme.labelMedium,
+                ),
+                const SizedBox(height: 5,),
+                Text(
+                  '4',
+                  style: Theme.of(context).textTheme.bodySmall,
+                )
+              ],
+            ),
+          ),
+        )
       ],
     );
   }

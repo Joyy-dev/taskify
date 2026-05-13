@@ -55,7 +55,7 @@ class TaskFormControllers extends GetxController{
       reminderTime: TimeOfDay.now()
     );
     taskControllers.addTask(task);
-    taskControllers.saveAndClose();
+    Get.back();
     Get.snackbar(
       'Success', 
       'Task Added successfully',
@@ -82,7 +82,7 @@ class TaskFormControllers extends GetxController{
   }
 
   void onCancel() {
-    taskControllers.saveAndClose();
+    Get.back();
     Get.snackbar(
       'Cancelled',
       'Task creation cancelled',

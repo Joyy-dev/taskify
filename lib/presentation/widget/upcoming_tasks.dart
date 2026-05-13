@@ -9,7 +9,7 @@ import 'package:taskify/presentation/widget/search_and_filter.dart';
 import 'package:taskify/presentation/widget/task_container.dart';
 
 class UpcomingTasks extends StatelessWidget {
-  UpcomingTasks({super.key});
+  const UpcomingTasks({super.key});
 
   @override
   Widget build(BuildContext context) {

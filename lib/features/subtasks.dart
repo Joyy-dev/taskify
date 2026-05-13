@@ -53,7 +53,7 @@ class Subtasks extends StatelessWidget {
           const SizedBox(height: 10,),
           Expanded(
             child: Obx(() {
-              final task = controllers.tasks.value;
+              final task = controllers.selectedTask.value;
               if (task == null || task.subTask.isEmpty) {
                 return Center(
                   child: Text(

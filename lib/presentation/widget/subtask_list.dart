@@ -8,12 +8,11 @@ class SubtaskList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final TaskDetailControllers controllers = Get.find();
-      final task = controllers.tasks.value;
+      final task = controllers.selectedTask.value;
       return ListView.builder(
         itemCount: task!.subTask.length,
         itemBuilder: (context, index) {
-          final task = controllers.tasks.value!;
-          //final completed = controllers.completedCount;
+          final task = controllers.selectedTask.value!;
           final subtask = task.subTask[index];
           return Container(
             decoration: BoxDecoration(
@@ -25,11 +24,14 @@ class SubtaskList extends StatelessWidget {
                   onPressed: () => controllers.toggleSubtask(index), 
                   icon: Icon(subtask.isDone ? Icons.check_box_outlined : Icons.check_box_outline_blank)
                 ),
-                Text(
-                  subtask.title,
-                  style: TextStyle(
-                    decoration: subtask.isDone ? TextDecoration.lineThrough : TextDecoration.none,
-                    decorationThickness: 5
+                Expanded(
+                  child: Text(
+                    subtask.title,
+                    style: TextStyle(
+                      decoration: subtask.isDone ? TextDecoration.lineThrough : TextDecoration.none,
+                      decorationThickness: 5,
+                      //overflow: TextOverflow.ellipsis
+                    ),
                   ),
                 )
               ],
