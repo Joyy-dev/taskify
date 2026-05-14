@@ -12,13 +12,13 @@ class UpcomingDeadline extends StatelessWidget {
             height: 50,
             width: 10,
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.surface,
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
               borderRadius: BorderRadius.circular(15)
             ),
           ),
           title: Text(
             'Landing Page Redesign',
-            style: Theme.of(context).textTheme.displayMedium,
+            style: Theme.of(context).textTheme.headlineSmall,
           ),
           subtitle: Text(
             'Project Phoenix . Due Tomorrow',
@@ -37,7 +37,7 @@ class UpcomingDeadline extends StatelessWidget {
           ),
           title: Text(
             'Finalize Invoice',
-            style: Theme.of(context).textTheme.displayMedium,
+            style: Theme.of(context).textTheme.headlineSmall,
           ),
           subtitle: Text(
             'Finance . Due in 2hrs',

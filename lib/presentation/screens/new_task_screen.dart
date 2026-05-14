@@ -33,21 +33,25 @@ class NewTaskScreen extends StatelessWidget {
             const SizedBox(height: 50,),
             Container(
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.inverseSurface,
+                color: Theme.of(context).colorScheme.tertiary,
                 borderRadius: BorderRadius.circular(10),
                 border: Border.all(color: Color(0xFF68788f))
               ),
               child: ListTile(
                 leading: CircleAvatar(
-                  child: Icon(Icons.lightbulb, color: Color(0xFF7c87f3),),
+                  backgroundColor: Theme.of(context).colorScheme.onTertiary,
+                  child: Icon(
+                    Icons.lightbulb, 
+                    color: Theme.of(context).colorScheme.tertiary,
+                  ),
                 ),
                 title: Text(
                   'Pro Tip',
-                  style: Theme.of(context).textTheme.headlineMedium,
+                  style: Theme.of(context).textTheme.displayLarge,
                 ),
                 subtitle: Text(
                   'Break down large tasks into smaller sub-tasks to maintainmomentum and reach your flow state faster',
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: Theme.of(context).textTheme.displaySmall,
                 ),
               ),
             )

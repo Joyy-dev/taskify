@@ -8,7 +8,7 @@ class FocusContainer extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(15.0),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.primary,
+        color: Theme.of(context).colorScheme.surfaceTint,
         borderRadius: BorderRadius.circular(15)
       ),
       child: Column(
@@ -16,17 +16,17 @@ class FocusContainer extends StatelessWidget {
         children: [
           Text(
             'Today\'s Focus'.toUpperCase(),
-            style: Theme.of(context).textTheme.headlineSmall,
+            style: Theme.of(context).textTheme.labelSmall,
           ),
           const SizedBox(height: 10,),
           Text(
             'Refine Product\nStrategy',
-            style: Theme.of(context).textTheme.headlineLarge,
+            style: Theme.of(context).textTheme.labelLarge,
           ),
           const SizedBox(height: 10,),
           Text(
             'Synthesize Q3 feedback into actionable roadmap items for the engineering sprint.',
-            style: Theme.of(context).textTheme.displayLarge,
+            style: Theme.of(context).textTheme.labelMedium,
           ),
           const SizedBox(height: 50,),
           Row(
@@ -35,7 +35,7 @@ class FocusContainer extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {}, 
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Theme.of(context).colorScheme.onPrimary,
+                    backgroundColor: Theme.of(context).colorScheme.onSecondary,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10)
                     )
@@ -56,6 +56,7 @@ class FocusContainer extends StatelessWidget {
                   onPressed: () {}, 
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.transparent,
+                    shadowColor: Colors.transparent,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                       side: BorderSide(

@@ -8,7 +8,7 @@ class ProTip extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(15.0),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.onPrimaryContainer,
+        color: Theme.of(context).colorScheme.tertiary,
         borderRadius: BorderRadius.circular(15)
       ),
       child: Column(

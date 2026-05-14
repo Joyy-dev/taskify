@@ -17,8 +17,8 @@ class ActivityProgress extends StatelessWidget {
                 child: CircularProgressIndicator(
                   strokeWidth: 10,
                   value: 0.75,
-                  backgroundColor: Theme.of(context).colorScheme.secondary,
-                  valueColor: AlwaysStoppedAnimation(Theme.of(context).colorScheme.onSecondary),
+                  backgroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
+                  valueColor: AlwaysStoppedAnimation(Theme.of(context).colorScheme.primary),
                 ),
               ),
               Text(
@@ -30,7 +30,7 @@ class ActivityProgress extends StatelessWidget {
           const SizedBox(height: 25,),
           Text(
             'Daily Goal',
-            style: Theme.of(context).textTheme.displayMedium,
+            style: Theme.of(context).textTheme.headlineSmall,
           ),
           const SizedBox(height: 4,),
           Text(

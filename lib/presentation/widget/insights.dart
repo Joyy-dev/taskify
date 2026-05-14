@@ -14,7 +14,7 @@ class Insights extends StatelessWidget {
           ),
           title: Text(
             'Optimized Schedule',
-            style: Theme.of(context).textTheme.displayMedium,
+            style: Theme.of(context).textTheme.headlineSmall,
           ),
           subtitle: Text(
             'I\'ve moved your "Email catch-up" to 2:00PM when your focus levels are typically lower',
@@ -29,7 +29,7 @@ class Insights extends StatelessWidget {
           ),
           title: Text(
             'Team Momentum',
-            style: Theme.of(context).textTheme.displayMedium,
+            style: Theme.of(context).textTheme.headlineSmall,
           ),
           subtitle: Text(
             'Sarah completed  4 shared tasks today. You\'re  on track to finish the sprint early!',

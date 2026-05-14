@@ -15,11 +15,14 @@ class SearchAndFilter extends StatelessWidget {
         ),
         const SizedBox(width: 10,),
         CircleAvatar(
-          backgroundColor: Theme.of(context).colorScheme.onPrimary,
+          backgroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
           minRadius: 8,
           child: IconButton(
             onPressed: () {}, 
-            icon: Icon(Icons.filter_list_rounded, color: Color(0xFF131e8c),)
+            icon: Icon(
+              Icons.filter_list_rounded, 
+              color: Theme.of(context).colorScheme.onSurface,
+            )
           ),
         )
       ],

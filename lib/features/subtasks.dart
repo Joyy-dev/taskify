@@ -84,7 +84,7 @@ class Subtasks extends StatelessWidget {
                   const SizedBox(width: 10,),
                   Text(
                     'Add Subtask',
-                    style: Theme.of(context).textTheme.displayMedium,
+                    style: Theme.of(context).textTheme.bodyMedium,
                   )
                 ],
               )

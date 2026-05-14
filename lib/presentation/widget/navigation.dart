@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:taskify/presentation/controllers/navigation_controllers.dart';
+import 'package:taskify/presentation/screens/calendar_screens.dart';
 import 'package:taskify/presentation/screens/home_screens.dart';
 import 'package:taskify/presentation/screens/task_list_screen.dart';
 
@@ -16,7 +17,8 @@ class _NavigationState extends State<Navigation> {
 
   final List<Widget> _screens = [
     HomeScreens(),
-    TaskListScreen()
+    TaskListScreen(),
+    CalendarScreens()
   ];
 
   @override

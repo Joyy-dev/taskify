@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:taskify/presentation/screens/new_task_screen.dart';
 import 'package:taskify/presentation/widget/activity_progress.dart';
-import 'package:taskify/presentation/widget/categories_container.dart';
+import 'package:taskify/features/category_container.dart';
 import 'package:taskify/presentation/widget/custom_screen.dart';
 import 'package:taskify/presentation/widget/focus_container.dart';
 import 'package:taskify/presentation/widget/insights.dart';
@@ -45,9 +45,11 @@ class _HomeScreensState extends State<HomeScreens> {
                   'Categories',
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
-                IconButton(
+                TextButton(
                   onPressed: () {}, 
-                  icon: Icon(Icons.add, color: Theme.of(context).colorScheme.onSecondary,)
+                  child: Text(
+                    'View All'
+                  )
                 )
               ],
             ),

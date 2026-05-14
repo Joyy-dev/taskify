@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:taskify/core/services/category_color.dart';
 import 'package:taskify/presentation/controllers/task_controllers.dart';
 import 'package:taskify/presentation/screens/task_detail_screens.dart';
-import 'package:taskify/presentation/widget/progress_container.dart';
+import 'package:taskify/presentation/widget/task_category.dart';
 import 'package:taskify/presentation/widget/search_and_filter.dart';
 import 'package:taskify/presentation/widget/task_container.dart';
 
@@ -51,7 +51,7 @@ class UpcomingTasks extends StatelessWidget {
                             borderRadius: BorderRadius.circular(20)
                           ),
                           child: Text(
-                            task.priority.name.toUpperCase(),
+                            task.priority.title.toUpperCase(),
                             style: Theme.of(context).textTheme.headlineSmall,
                           ),
                         ),

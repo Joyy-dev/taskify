@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:get/route_manager.dart';
+import 'package:taskify/core/enums/category.dart';
 import 'package:taskify/features/custom_form.dart';
 import 'package:taskify/features/priority_level.dart';
 import 'package:taskify/presentation/controllers/task_form_controllers.dart';
@@ -14,6 +15,7 @@ class TaskForm extends StatelessWidget {
     return Form(
       key: controller.formKey,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CustomForm(
             hint: 'e.g. Design System Audit', 
@@ -30,24 +32,24 @@ class TaskForm extends StatelessWidget {
               ),
               const SizedBox(height: 5,),
               Card(
-                child: DropdownButtonFormField<String>(
-                  initialValue: controller.selectedCategory.value,
+                child: DropdownButtonFormField<Category>(
+                  initialValue: Category.work,
                   dropdownColor: Theme.of(context).colorScheme.inverseSurface,
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     contentPadding: EdgeInsets.all(12),
                   ),
-                  items: ['Work', 'Personal'].map((category) {
+                  items: Category.values.map((category) {
                     return DropdownMenuItem(
                       value: category,
                       child: Text(
-                        category,
+                        category.label,
                         style: Theme.of(context).textTheme.bodyMedium,
                       )
                     );
                   }).toList(), 
                   onChanged: (value) {
-                    controller.setCategory(value!);
+                    //Category. = value!;
                   },
                 ),
               ),
@@ -64,10 +66,14 @@ class TaskForm extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 25,),
+          Text(
+            'Priority'.toUpperCase()
+          ),
+          const SizedBox(height: 5,),
           PriorityLevel(
-            onSelected: (level) {
-              controller.setPriority(level);
-            },
+            // onSelected: (level) {
+            //   controller.setPriority(level);
+            // },
           ),
           const SizedBox(height: 25,),
           CustomForm(
@@ -82,7 +88,7 @@ class TaskForm extends StatelessWidget {
             padding: EdgeInsets.symmetric(vertical: 7),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              color: Theme.of(context).colorScheme.onSecondary
+              color: Theme.of(context).colorScheme.primary
             ),
             child: ElevatedButton(
               onPressed: controller.saveTask, 
@@ -92,7 +98,6 @@ class TaskForm extends StatelessWidget {
               ),
               child: Text(
                 'Save Task',
-                style: Theme.of(context).textTheme.displaySmall,
               )
             ),
           ),
@@ -106,15 +111,10 @@ class TaskForm extends StatelessWidget {
                 color: Color(0xFF68788f)
               )
             ),
-            child: ElevatedButton(
+            child: TextButton(
               onPressed: controller.onCancel, 
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.transparent,
-                shadowColor: Colors.transparent
-              ),
               child: Text(
                 'Cancel',
-                style: Theme.of(context).textTheme.displayMedium,
               )
             ),
           )
