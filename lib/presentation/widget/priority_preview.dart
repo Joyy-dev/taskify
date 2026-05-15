@@ -5,6 +5,7 @@ import 'package:taskify/features/priority_level.dart';
 import 'package:taskify/presentation/controllers/task_controllers.dart';
 import 'package:taskify/presentation/controllers/task_detail_controllers.dart';
 import 'package:taskify/presentation/controllers/task_form_controllers.dart';
+import 'package:taskify/presentation/widget/custom_container.dart';
 
 class PriorityPreview extends StatelessWidget {
   const PriorityPreview({super.key});
@@ -17,17 +18,7 @@ class PriorityPreview extends StatelessWidget {
 
     final task = controllers.selectedTask.value;
 
-    return Container(
-      padding: EdgeInsets.all(15),
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.inverseSurface,
-        borderRadius: BorderRadius.circular(15),
-        boxShadow: [
-          BoxShadow(
-            color: Color(0xFF283044)
-          )
-        ]
-      ),
+    return CustomContainer(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -44,54 +35,51 @@ class PriorityPreview extends StatelessWidget {
           const SizedBox(height: 20,),
           Container(
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.primary,
+              color: Theme.of(context).colorScheme.surface,
               borderRadius: BorderRadius.circular(10)
             ),
             child: ListTile(
-              leading: Icon(Icons.calendar_month, color: Colors.white,),
+              leading: Icon(Icons.calendar_month, color: Theme.of(context).colorScheme.onSurface),
               title: Text(
                 'DUE DATE',
-                style: Theme.of(context).textTheme.headlineSmall,
+                style: Theme.of(context).textTheme.titleSmall,
               ),
               subtitle: Text(
                 DateFormat('MMM dd, yyyy').format(task!.dueDate),
-                style: TextStyle(
-                  color: Colors.white70,
-                  fontSize: 17
-                ),
+                style: Theme.of(context).textTheme.bodySmall 
               ),
               trailing: IconButton(
                 onPressed: () {
                   controller.datePicker(context);
                 }, 
-                icon: Icon(Icons.edit, color: Colors.white60,)
+                icon: Icon(
+                  Icons.edit, 
+                  color: Theme.of(context).colorScheme.onSurface
+                )
               ),
             ),
           ),
           const SizedBox(height: 10,),
           Container(
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.primary,
+              color: Theme.of(context).colorScheme.surface,
               borderRadius: BorderRadius.circular(10)
             ),
             child: ListTile(
-              leading: Icon(Icons.notifications_active_outlined, color: Colors.white,),
+              leading: Icon(Icons.notifications_active_outlined, color: Theme.of(context).colorScheme.onSurface),
               title: Text(
                 'Reminder'.toUpperCase(),
-                style: Theme.of(context).textTheme.headlineSmall,
+                style: Theme.of(context).textTheme.titleSmall,
               ),
               subtitle: Text(
                 task.reminderTime.format(context),
-                style: TextStyle(
-                  color: Colors.white70,
-                  fontSize: 17
-                ),
+                style: Theme.of(context).textTheme.bodySmall 
               ),
               trailing: IconButton(
                 onPressed: () {
                   controllers.selectReminderTime(context);
                 }, 
-                icon: Icon(Icons.edit, color: Colors.white60,)
+                icon: Icon(Icons.edit, color: Theme.of(context).colorScheme.onSurface)
               ),
             ),
           ),
@@ -103,7 +91,8 @@ class PriorityPreview extends StatelessWidget {
               cont.confirmDeleteTask(context, task.id);
             }, 
             style: ElevatedButton.styleFrom(
-              backgroundColor: Theme.of(context).colorScheme.error,
+              backgroundColor: Theme.of(context).colorScheme.onError,
+              padding: EdgeInsets.all(15),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10)
               )
@@ -111,15 +100,11 @@ class PriorityPreview extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.delete, size: 30, color: Colors.white,),
+                Icon(Icons.delete, size: 25, color: Theme.of(context).colorScheme.onSurface,),
                 const SizedBox(width: 5,),
                 Text(
                   'Delete Task',
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold
-                  ),
+                  style: Theme.of(context).textTheme.titleMedium
                 )
               ],
             )

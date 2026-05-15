@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
 import 'package:taskify/presentation/controllers/task_detail_controllers.dart';
+import 'package:taskify/presentation/widget/custom_container.dart';
 import 'package:taskify/presentation/widget/subtask_list.dart';
 
 class Subtasks extends StatelessWidget {
@@ -12,18 +13,8 @@ class Subtasks extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final completed = controllers.completedCount;
-    return Container(
+    return CustomContainer(
       height: 350,
-      padding: EdgeInsets.all(15),
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.inverseSurface,
-        borderRadius: BorderRadius.circular(15),
-        boxShadow: [
-          BoxShadow(
-            color: Color(0xFF283044)
-          )
-        ]
-      ),
       child: Column(
         children: [
           Row(
@@ -33,7 +24,7 @@ class Subtasks extends StatelessWidget {
                 children: [
                   Icon(
                     Icons.checklist_sharp, 
-                    color: Theme.of(context).colorScheme.surface, 
+                    color: Theme.of(context).colorScheme.secondary, 
                     size: 30
                   ),
                   const SizedBox(width: 10,),
@@ -80,7 +71,7 @@ class Subtasks extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.add, color: Theme.of(context).colorScheme.surface, size: 25,),
+                  Icon(Icons.add, color: Theme.of(context).colorScheme.secondary, size: 25,),
                   const SizedBox(width: 10,),
                   Text(
                     'Add Subtask',

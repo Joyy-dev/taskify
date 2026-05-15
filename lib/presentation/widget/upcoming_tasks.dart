@@ -52,7 +52,7 @@ class UpcomingTasks extends StatelessWidget {
                           ),
                           child: Text(
                             task.priority.title.toUpperCase(),
-                            style: Theme.of(context).textTheme.headlineSmall,
+                            style: Theme.of(context).textTheme.displaySmall,
                           ),
                         ),
                         IconButton(

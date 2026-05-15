@@ -57,7 +57,7 @@ class TaskDetailControllers extends GetxController{
 
     Get.defaultDialog(
       radius: 10,
-      backgroundColor: Theme.of(context).colorScheme.onTertiary,
+      backgroundColor: Theme.of(context).colorScheme.onSurface,
       title: 'Add New Subtask',
       titlePadding: EdgeInsets.symmetric(vertical: 10),
       titleStyle: Theme.of(context).textTheme.displayMedium,
@@ -73,11 +73,10 @@ class TaskDetailControllers extends GetxController{
         ),
       ),
       textConfirm: 'Add',
-      cancelTextColor: Theme.of(context).colorScheme.primary,
+      cancelTextColor: Theme.of(context).colorScheme.surfaceContainer,
       onConfirm: () {
         addSubtask(textController.text);
         Get.back();
-        //textController.dispose();
       },
       onCancel: () {
         Get.back();

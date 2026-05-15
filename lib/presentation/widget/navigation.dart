@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:taskify/presentation/controllers/navigation_controllers.dart';
 import 'package:taskify/presentation/screens/calendar_screens.dart';
 import 'package:taskify/presentation/screens/home_screens.dart';
+import 'package:taskify/presentation/screens/settings_screens.dart';
 import 'package:taskify/presentation/screens/task_list_screen.dart';
 
 class Navigation extends StatefulWidget {
@@ -18,7 +19,8 @@ class _NavigationState extends State<Navigation> {
   final List<Widget> _screens = [
     HomeScreens(),
     TaskListScreen(),
-    CalendarScreens()
+    CalendarScreens(),
+    SettingsScreens()
   ];
 
   @override

@@ -31,7 +31,7 @@ class TaskDetailScreens extends StatelessWidget {
               ),
               child: Text(
                 'In Progress',
-                style: Theme.of(context).textTheme.headlineSmall,
+                style: Theme.of(context).textTheme.titleSmall,
               ),
             ),
             const SizedBox(height: 15,),

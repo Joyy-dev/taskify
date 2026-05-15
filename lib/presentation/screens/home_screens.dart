@@ -30,7 +30,7 @@ class _HomeScreensState extends State<HomeScreens> {
             () => NewTaskScreen()
           );
         },
-        child: Icon(Icons.add, color: Theme.of(context).colorScheme.onSurfaceVariant,),
+        child: Icon(Icons.add),
       ),
       child: SingleChildScrollView(
         child: Column(

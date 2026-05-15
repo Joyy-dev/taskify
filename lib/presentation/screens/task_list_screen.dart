@@ -26,7 +26,7 @@ class TaskListScreen extends StatelessWidget {
             () => NewTaskScreen()
           );
         },
-        child: Icon(Icons.add, color: Theme.of(context).colorScheme.onSurfaceVariant,),
+        child: Icon(Icons.add),
       ), 
       child: Obx(() {
         if (controllers.tasks.isEmpty) {

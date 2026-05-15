@@ -25,17 +25,18 @@ class AppTheme {
 
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       backgroundColor: Color(0xFF3323cc),
+      foregroundColor: Colors.white,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(50)
       ),
-      splashColor: Colors.white
     ),
 
     colorScheme: ColorScheme(
       brightness: Brightness.light, 
       primary: Color(0xFF3525cd), 
       onPrimary: Color(0xFFffffff), 
-      secondary: Color(0xFF505f76), 
+      //secondary: Color(0xFF505f76), 
+      secondary: Color(0xFFe4e1ee),
       onSecondary: Color(0xFFffffff), 
       error: Color(0xFFba1a1a), 
       onError: Color(0xFFffffff), 
@@ -216,8 +217,10 @@ class AppTheme {
       unselectedItemColor: Color(0xFFbec6e0),
       type: BottomNavigationBarType.fixed,
     ),
+
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       backgroundColor: Color(0xFFa0a3ff),
+      foregroundColor: Color(0xFF0b1326),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(50)
       ),
@@ -227,7 +230,8 @@ class AppTheme {
       brightness: Brightness.dark, 
       primary: Color(0xFFc0c1ff), 
       onPrimary: Color(0xFF1000a9), 
-      secondary: Color(0xFFbdc2ff), 
+      //secondary: Color(0xFFbdc2ff), 
+      secondary: Color(0xFF283044),
       onSecondary: Color(0xFFbdc2ff), 
       error: Color(0xFFffb4ab), 
       onError: Color(0xFF690005), 
