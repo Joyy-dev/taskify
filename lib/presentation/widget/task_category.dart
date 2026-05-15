@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:taskify/core/enums/category.dart';
+import 'package:taskify/core/enums/task_time.dart';
 
 class ProgressContainer extends StatefulWidget {
   const ProgressContainer({super.key});
@@ -12,7 +12,7 @@ class _ProgressContainerState extends State<ProgressContainer> {
   final int onSelected = 0;
   @override
   Widget build(BuildContext context) {
-    final cat = Category.values;
+    final cat = TaskTime.values;
     return SizedBox(
       height: 70,
       child: ListView.builder(
@@ -32,7 +32,7 @@ class _ProgressContainerState extends State<ProgressContainer> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    title.label,
+                    title.text,
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
                   const SizedBox(height: 5,),

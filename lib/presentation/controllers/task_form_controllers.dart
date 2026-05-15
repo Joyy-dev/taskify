@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:taskify/core/enums/category.dart';
 import 'package:taskify/core/enums/priority_levels.dart';
 import 'package:taskify/data/task_model.dart';
 import 'package:taskify/presentation/controllers/task_controllers.dart';
@@ -10,12 +11,12 @@ class TaskFormControllers extends GetxController{
   final descriptionController = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
-  var selectedCategory = 'Work'.obs;
+  var selectedCategory = Category.work.obs;
   var selectedPriority = Rxn<PriorityLevels>();
   var selectedDate = Rxn<DateTime>();
   final TaskControllers taskControllers = Get.find();
 
-  void setCategory(String value) {
+  void setCategory(Category value) {
     selectedCategory.value = value;
   }
 
@@ -69,7 +70,7 @@ class TaskFormControllers extends GetxController{
     descriptionController.clear();
     dueDateController.clear();
     selectedPriority.value = null;
-    selectedCategory.value = 'Work';
+    selectedCategory.value = Category.work;
     selectedDate.value = null;
   }
 

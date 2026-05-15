@@ -17,17 +17,21 @@ class UpcomingTasks extends StatelessWidget {
     return Obx(() => Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        Text(
+          'Focus Mode',
+          style: Theme.of(context).textTheme.headlineLarge,
+        ),
+        const SizedBox(height: 5,),
+        Text(
+          '4 tasks remaining for today',
+        ),
+        const SizedBox(height: 20,),
         SearchAndFilter(),
         const SizedBox(height: 30,),
         ProgressContainer(),
         const SizedBox(height: 30,),
-        Text(
-         'Upcoming Tasks',
-          style: Theme.of(context).textTheme.headlineMedium,
-        ),
-        const SizedBox(height: 10,),
         SizedBox(
-          height: 540,
+          height: 500,
           child: ListView.builder(
             itemCount: controllers.tasks.length,
             itemBuilder: (context, index) {

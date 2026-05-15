@@ -34,7 +34,7 @@ class TaskForm extends StatelessWidget {
               Card(
                 child: DropdownButtonFormField<Category>(
                   initialValue: Category.work,
-                  dropdownColor: Theme.of(context).colorScheme.inverseSurface,
+                  dropdownColor: Theme.of(context).colorScheme.secondary,
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     contentPadding: EdgeInsets.all(12),

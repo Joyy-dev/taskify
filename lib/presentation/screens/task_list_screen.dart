@@ -49,7 +49,7 @@ class TaskListScreen extends StatelessWidget {
                   }, 
                   child: Text(
                     'Create New Task',
-                    style: Theme.of(context).textTheme.displayMedium,
+                    //style: Theme.of(context).textTheme.displayMedium,
                   )
                 )
               ],

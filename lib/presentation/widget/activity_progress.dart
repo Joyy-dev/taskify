@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:taskify/presentation/controllers/task_controllers.dart';
 
 class ActivityProgress extends StatelessWidget {
   const ActivityProgress({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    final controller =  Get.find<TaskControllers>();
+    return Obx(() {
+      final totalTask = controller.todayTask.length;
+      final completedTask = controller.completedTodayTask.length;
+      final progress = controller.dailyProgress;
+      return Center(
       child: Column(
         children: [
           Stack(
@@ -16,13 +23,13 @@ class ActivityProgress extends StatelessWidget {
                 width: 150,
                 child: CircularProgressIndicator(
                   strokeWidth: 10,
-                  value: 0.75,
+                  value: progress,
                   backgroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
                   valueColor: AlwaysStoppedAnimation(Theme.of(context).colorScheme.primary),
                 ),
               ),
               Text(
-                '75%',
+                '${(progress * 100).toInt()}%',
                 style: Theme.of(context).textTheme.headlineMedium,
               )
             ],
@@ -34,11 +41,12 @@ class ActivityProgress extends StatelessWidget {
           ),
           const SizedBox(height: 4,),
           Text(
-            '6 of 8 tasks completed',
+            totalTask == 0 ? 'No tasks Schedule for today' : '$completedTask tasks completed',
             style: Theme.of(context).textTheme.bodySmall,
           )
         ],
       ),
     );
+    });
   }
 }

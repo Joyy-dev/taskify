@@ -1,9 +1,12 @@
+import 'package:flutter/material.dart';
+
 enum Category {
-  work('Work'),
-  personal('Personal'),
-  finance('Finance'),
-  health('Health');
+  work('Work', Icons.work),
+  personal('Personal', Icons.person),
+  finance('Finance', Icons.monetization_on),
+  health('Health', Icons.health_and_safety);
 
   final String label;
-  const Category (this.label);
+  final IconData icon;
+  const Category (this.label, this.icon);
 }

@@ -11,6 +11,8 @@ import 'package:taskify/presentation/widget/navigation.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
+  // final box = GetStorage();
+  // box.erase();
   Get.put(ThemeControllers());
   Get.put(TaskControllers());
   Get.put(TaskDetailControllers());

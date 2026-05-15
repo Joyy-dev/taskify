@@ -54,7 +54,7 @@ class _HomeScreensState extends State<HomeScreens> {
               ],
             ),
             const SizedBox(height: 10,),
-            CategoriesContainer(),
+            CategoryContainer(),
             const SizedBox(height: 45,),
             ActivityProgress(),
             const SizedBox(height: 30,),

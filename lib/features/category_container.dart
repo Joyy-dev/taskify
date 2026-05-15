@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:taskify/core/enums/category.dart';
+import 'package:taskify/presentation/controllers/task_controllers.dart';
 
-class CategoriesContainer extends StatelessWidget {
-  const CategoriesContainer({super.key});
+class CategoryContainer extends StatelessWidget {
+  const CategoryContainer({super.key});
 
   @override
   Widget build(BuildContext context) { 
+    final controllers = Get.find<TaskControllers>();
     final container = Category.values; 
     return SizedBox(
       height: 120,
@@ -13,7 +16,8 @@ class CategoriesContainer extends StatelessWidget {
         itemCount: container.length,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          final title = container[index];
+          final category = container[index];
+          final activeTask = controllers.getTaskCountbyCategory(category);
           return Container(
             padding: EdgeInsets.all(10.0),
             margin: EdgeInsets.symmetric(horizontal: 5),
@@ -30,14 +34,14 @@ class CategoriesContainer extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Icon(Icons.work, color: Theme.of(context).colorScheme.onSurface,),
+                  Icon(category.icon, color: Theme.of(context).colorScheme.onSurface,),
                   const SizedBox(height: 20,),
                   Text(
-                    title.label,
+                    category.label,
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
                   Text(
-                    '12 Active Tasks',
+                    activeTask == 0 ? 'No active tasks': '$activeTask Active Tasks',
                     style: Theme.of(context).textTheme.bodySmall,
                   )
                 ],
@@ -46,42 +50,5 @@ class CategoriesContainer extends StatelessWidget {
           },
         ),
     );
-    
-    // Row(
-    //   children: [
-        
-    //     const SizedBox(width: 20,),
-    //     Expanded(
-    //       child: Container(
-    //         padding: EdgeInsets.all(10.0),
-    //         decoration: BoxDecoration(
-    //           color: Theme.of(context).colorScheme.onTertiary,
-    //           border: Border(
-    //             left: BorderSide(
-    //               color: Theme.of(context).colorScheme.onSurface,
-    //               width: 5
-    //             )
-    //           ),
-    //           borderRadius: BorderRadius.circular(12)
-    //         ),
-    //         child: Column(
-    //           crossAxisAlignment: CrossAxisAlignment.start,
-    //           children: [
-    //             Icon(Icons.person, color: Theme.of(context).colorScheme.onSurface,),
-    //             const SizedBox(height: 20,),
-    //             Text(
-    //               'Personal',
-    //               style: Theme.of(context).textTheme.headlineSmall,
-    //             ),
-    //             Text(
-    //               '5 Active Tasks',
-    //               style: Theme.of(context).textTheme.bodySmall,
-    //             )
-    //           ],
-    //         ),
-    //       ),
-    //     )
-    //   ],
-    // );
   }
 }
