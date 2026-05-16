@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:taskify/core/utility/format_due_date.dart';
 import 'package:taskify/presentation/controllers/task_controllers.dart';
+import 'package:taskify/presentation/screens/task_detail_screens.dart';
 
 class UpcomingDeadline extends StatelessWidget {
   const UpcomingDeadline({super.key});
@@ -37,7 +38,13 @@ class UpcomingDeadline extends StatelessWidget {
             '${task.category.label} . ${formatDueDate(task.dueDate)}',
             style: Theme.of(context).textTheme.bodySmall,
           ),
-          trailing: Icon(Icons.chevron_right, color: Color(0xFF777681), size: 40,),
+          trailing: IconButton(
+            onPressed: () {
+              Get.to(() => TaskDetailScreens(task: task));
+            }, 
+            icon: Icon(Icons.chevron_right, color: Color(0xFF777681), size: 40,)
+          )
+          ,
         );
       }).toList()
     );

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/route_manager.dart';
 import 'package:taskify/core/enums/category.dart';
-import 'package:taskify/features/custom_form.dart';
-import 'package:taskify/features/priority_level.dart';
+import 'package:taskify/presentation/controllers/task_detail_controllers.dart';
+import 'package:taskify/presentation/widget/custom_form.dart';
+import 'package:taskify/presentation/widget/priority_level.dart';
 import 'package:taskify/presentation/controllers/task_form_controllers.dart';
 
 class TaskForm extends StatelessWidget {
@@ -12,6 +14,7 @@ class TaskForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.find<TaskFormControllers>();
+    final controllers = Get.find<TaskDetailControllers>();
     return Form(
       key: controller.formKey,
       child: Column(
@@ -21,6 +24,12 @@ class TaskForm extends StatelessWidget {
             hint: 'e.g. Design System Audit', 
             tag: 'Task Name',
             controller: controller.taskNameController,
+            validator: (value) {
+              if (value == null || value.trim().isEmpty) {
+                return 'Task name is required';
+              }
+              return null;
+            },
           ),
           const SizedBox(height: 25,),
           Column(
@@ -32,8 +41,8 @@ class TaskForm extends StatelessWidget {
               ),
               const SizedBox(height: 5,),
               Card(
-                child: DropdownButtonFormField<Category>(
-                  initialValue: Category.work,
+                child: Obx(() => DropdownButtonFormField<Category>(
+                  initialValue: controller.selectedCategory.value,
                   dropdownColor: Theme.of(context).colorScheme.secondary,
                   decoration: InputDecoration(
                     border: InputBorder.none,
@@ -49,38 +58,66 @@ class TaskForm extends StatelessWidget {
                     );
                   }).toList(), 
                   onChanged: (value) {
-                    //Category. = value!;
+                    if (value != null) {
+                      controller.setCategory(value);
+                    }
                   },
-                ),
+                )
+                )
               ),
             ],
           ),
           const SizedBox(height: 25,),
-          CustomForm(
-            tag: 'Due Date',
-            hint: 'mm/dd/yy',
-            controller: controller.dueDateController,
-            icon: IconButton(
-              onPressed: () => controller.datePicker(context), 
-              icon: Icon(Icons.calendar_today_outlined)
-            ),
+          Row(
+            children: [
+              Expanded(
+                child: CustomForm(
+                  tag: 'Due Date',
+                  hint: 'mm/dd/yy',
+                  controller: controller.dueDateController,
+                  icon: IconButton(
+                    onPressed: () => controller.datePicker(context), 
+                    icon: Icon(Icons.calendar_today_outlined)
+                  ),
+                ),
+              ),
+              Expanded(
+                child: CustomForm(
+                  tag: 'Due Time',
+                  hint: 'Select time',
+                  controller: controllers.dueTimeController,
+                  icon: IconButton(
+                    onPressed: () => controllers.selectReminderTime(context), 
+                    icon: Icon(Icons.alarm)
+                  ),
+                ),
+              )
+            ],
           ),
           const SizedBox(height: 25,),
           Text(
             'Priority'.toUpperCase()
           ),
           const SizedBox(height: 5,),
-          PriorityLevel(
-            // onSelected: (level) {
-            //   controller.setPriority(level);
-            // },
+          Obx(() => PriorityLevel(
+            selectedPriority: controller.selectedPriority.value,
+            onSelected: (level) {
+              controller.setPriority(level);
+            }
+            )
           ),
           const SizedBox(height: 25,),
           CustomForm(
             tag: 'Description',
             hint: 'Details about this task...', 
             line: 5,
-            controller: controller.descriptionController
+            controller: controller.descriptionController,
+            validator: (value) {
+              if (value == null || value.trim().isEmpty) {
+                return 'Enter a value for description';
+              }
+              return null;
+            },
           ),
           const SizedBox(height: 50,),
           Container(

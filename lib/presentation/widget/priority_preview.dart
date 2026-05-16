@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:taskify/features/priority_level.dart';
+import 'package:taskify/presentation/widget/priority_level.dart';
 import 'package:taskify/presentation/controllers/task_controllers.dart';
 import 'package:taskify/presentation/controllers/task_detail_controllers.dart';
 import 'package:taskify/presentation/controllers/task_form_controllers.dart';
@@ -27,10 +27,16 @@ class PriorityPreview extends StatelessWidget {
             style: Theme.of(context).textTheme.bodySmall,
           ),
           const SizedBox(height: 10,),
+          Obx(() => PriorityLevel(
+            selectedPriority: controller.selectedPriority.value,
+            onSelected: (value) {
+              controller.setPriority(value);
+            })
+          ),
           PriorityLevel(
-            // onSelected: (value) {
-            //   controller.selectedPriority.value = value;
-            // },
+            onSelected: (value) {
+              controller.selectedPriority.value = value;
+            },
           ),
           const SizedBox(height: 20,),
           Container(

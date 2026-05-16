@@ -8,6 +8,6 @@ Color getLevelColor(BuildContext context, PriorityLevels level) {
     case PriorityLevels.medium:
     return Theme.of(context).colorScheme.primaryContainer;
     case PriorityLevels.high:
-    return Theme.of(context).colorScheme.surfaceTint;    
+    return Theme.of(context).colorScheme.onSurfaceVariant;    
   }
 }

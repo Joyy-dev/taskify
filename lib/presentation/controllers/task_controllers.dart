@@ -104,11 +104,36 @@ class TaskControllers extends GetxController{
   List<TaskModel> get upComingTask{
     final now = DateTime.now();
     final filteredTasks = tasks.where((task) {
-      final difference = task.dueDate.difference(now).inHours;
+      final taskDateTime = DateTime(
+        task.dueDate.year,
+        task.dueDate.month,
+        task.dueDate.day,
+        task.reminderTime.hour,
+        task.reminderTime.minute
+      );
+      final difference = taskDateTime.difference(now).inHours;
 
       return !task.isCompleted && difference >= 0 && difference <= 48;
     }).toList();
-    filteredTasks.sort((a, b) => a.dueDate.compareTo(b.dueDate));
+    filteredTasks.sort((a, b) {
+      final aDateTime = DateTime(
+        a.dueDate.year,
+        a.dueDate.month,
+        a.dueDate.day,
+        a.reminderTime.hour,
+        a.reminderTime.minute
+      );
+
+      final bDatTime = DateTime(
+        b.dueDate.year,
+        b.dueDate.month,
+        b.dueDate.day,
+        b.reminderTime.hour,
+        b.reminderTime.minute
+      );
+
+      return aDateTime.compareTo(bDatTime);      
+    });
     return filteredTasks;
   }
 }

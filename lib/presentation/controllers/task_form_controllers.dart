@@ -4,6 +4,7 @@ import 'package:taskify/core/enums/category.dart';
 import 'package:taskify/core/enums/priority_levels.dart';
 import 'package:taskify/data/task_model.dart';
 import 'package:taskify/presentation/controllers/task_controllers.dart';
+import 'package:uuid/uuid.dart';
 
 class TaskFormControllers extends GetxController{
   final taskNameController = TextEditingController();
@@ -44,10 +45,19 @@ class TaskFormControllers extends GetxController{
   }
 
   void saveTask() {
+    final uuid = Uuid();
     if (!formKey.currentState!.validate()) return;
+    if (selectedDate.value == null) {
+      Get.snackbar(
+        'Missing Date', 
+        'Please select a due date',
+        snackPosition: SnackPosition.TOP
+      );
+      return;
+    }
 
     final task = TaskModel(
-      id: DateTime.now().millisecondsSinceEpoch.toString(), 
+      id: uuid.v4(), 
       taskTitle: taskNameController.text, 
       category: selectedCategory.value, 
       description: descriptionController.text, 

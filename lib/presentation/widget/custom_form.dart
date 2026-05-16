@@ -6,6 +6,7 @@ class CustomForm extends StatelessWidget {
   final IconButton? icon;
   final int? line;
   final TextEditingController controller;
+  final String? Function(String?)? validator;
 
   const CustomForm({
     this.hint,
@@ -13,6 +14,7 @@ class CustomForm extends StatelessWidget {
     this.icon,
     this.line,
     required this.controller,
+    this.validator,
     super.key
   });
 
@@ -32,6 +34,7 @@ class CustomForm extends StatelessWidget {
             readOnly: icon != null,
             keyboardType: TextInputType.multiline,
             maxLines: line,
+            validator: validator,
             decoration: InputDecoration(
               border: InputBorder.none,
               hintText: hint,

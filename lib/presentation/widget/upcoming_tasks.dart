@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:taskify/core/services/category_color.dart';
 import 'package:taskify/presentation/controllers/task_controllers.dart';
+import 'package:taskify/presentation/controllers/task_detail_controllers.dart';
 import 'package:taskify/presentation/screens/task_detail_screens.dart';
 import 'package:taskify/presentation/widget/task_category.dart';
 import 'package:taskify/presentation/widget/search_and_filter.dart';
@@ -14,6 +15,7 @@ class UpcomingTasks extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final TaskControllers controllers = Get.find();
+    final TaskDetailControllers controller = Get.find();
     return Obx(() => Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -60,7 +62,7 @@ class UpcomingTasks extends StatelessWidget {
                           ),
                         ),
                         IconButton(
-                          onPressed: () {}, 
+                          onPressed: () => controller.showTaskMenu(), 
                           icon: Icon(Icons.more_vert, color: Color(0xFF565e74),)
                         )
                       ],

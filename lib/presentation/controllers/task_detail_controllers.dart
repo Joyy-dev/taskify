@@ -3,9 +3,11 @@ import 'package:get/get.dart';
 import 'package:taskify/data/subtask_model.dart';
 import 'package:taskify/data/task_model.dart';
 import 'package:taskify/presentation/controllers/task_controllers.dart';
+import 'package:taskify/presentation/widget/task_menu.dart';
 
 class TaskDetailControllers extends GetxController{
   final selectedTask = Rxn<TaskModel>();
+  final dueTimeController = TextEditingController();
   final TaskControllers controllers = Get.find();
 
   void setTask(TaskModel taskData) {
@@ -45,10 +47,13 @@ class TaskDetailControllers extends GetxController{
       initialTime: selectedTask.value!.reminderTime
     );
 
+    if (!context.mounted) return;
+
     if (pickedTime != null) {
       selectedTask.value!.reminderTime = pickedTime;
       selectedTask.refresh();
       controllers.saveTask();
+      dueTimeController.text = pickedTime.format(context);
     }
   }
 
@@ -81,6 +86,13 @@ class TaskDetailControllers extends GetxController{
       onCancel: () {
         Get.back();
       },
+    );
+  }
+
+  void showTaskMenu() {
+    Get.bottomSheet(
+      TaskMenu(),
+      isScrollControlled: true
     );
   }
 }
