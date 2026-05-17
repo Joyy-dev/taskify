@@ -83,7 +83,7 @@ class PriorityPreview extends StatelessWidget {
               ),
               trailing: IconButton(
                 onPressed: () {
-                  controllers.selectReminderTime(context);
+                  controller.selectReminderTime(context);
                 }, 
                 icon: Icon(Icons.edit, color: Theme.of(context).colorScheme.onSurface)
               ),

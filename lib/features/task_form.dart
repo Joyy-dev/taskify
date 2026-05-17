@@ -3,18 +3,19 @@ import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/route_manager.dart';
 import 'package:taskify/core/enums/category.dart';
-import 'package:taskify/presentation/controllers/task_detail_controllers.dart';
+import 'package:taskify/data/task_model.dart';
 import 'package:taskify/presentation/widget/custom_form.dart';
 import 'package:taskify/presentation/widget/priority_level.dart';
 import 'package:taskify/presentation/controllers/task_form_controllers.dart';
 
 class TaskForm extends StatelessWidget {
-  const TaskForm({super.key}); 
+  final TaskModel? task;
+  const TaskForm({super.key, this.task}); 
 
   @override
   Widget build(BuildContext context) {
     final controller = Get.find<TaskFormControllers>();
-    final controllers = Get.find<TaskDetailControllers>();
+    controller.initializeTask(task);
     return Form(
       key: controller.formKey,
       child: Column(
@@ -85,9 +86,9 @@ class TaskForm extends StatelessWidget {
                 child: CustomForm(
                   tag: 'Due Time',
                   hint: 'Select time',
-                  controller: controllers.dueTimeController,
+                  controller: controller.dueTimeController,
                   icon: IconButton(
-                    onPressed: () => controllers.selectReminderTime(context), 
+                    onPressed: () => controller.selectReminderTime(context), 
                     icon: Icon(Icons.alarm)
                   ),
                 ),
@@ -128,14 +129,15 @@ class TaskForm extends StatelessWidget {
               color: Theme.of(context).colorScheme.primary
             ),
             child: ElevatedButton(
-              onPressed: controller.saveTask, 
+              onPressed: controller.saveOrUpdateTask, 
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.transparent,
                 shadowColor: Colors.transparent
               ),
               child: Text(
-                'Save Task',
+                controller.editingTask == null ? 'Save Task' : 'Update Tasks',
               )
+              // Obx(() => )               
             ),
           ),
           const SizedBox(height: 15,),

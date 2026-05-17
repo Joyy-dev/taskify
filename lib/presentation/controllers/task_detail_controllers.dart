@@ -7,7 +7,6 @@ import 'package:taskify/presentation/widget/task_menu.dart';
 
 class TaskDetailControllers extends GetxController{
   final selectedTask = Rxn<TaskModel>();
-  final dueTimeController = TextEditingController();
   final TaskControllers controllers = Get.find();
 
   void setTask(TaskModel taskData) {
@@ -34,27 +33,19 @@ class TaskDetailControllers extends GetxController{
     controllers.saveTask();
   }
 
+  double get progress {
+    final currentTask = selectedTask.value;
+    if (currentTask == null || currentTask.subTask.isEmpty) {
+      return 0;
+    }
+    return completedCount / currentTask.subTask.length;
+  }
+
   int get completedCount {
     final currentTask = selectedTask.value;
 
     if (currentTask == null) return 0;
     return currentTask.subTask.where((s) => s.isDone).length;
-  }
-
-  Future<void> selectReminderTime(BuildContext context) async {
-    final pickedTime = await showTimePicker(
-      context: context, 
-      initialTime: selectedTask.value!.reminderTime
-    );
-
-    if (!context.mounted) return;
-
-    if (pickedTime != null) {
-      selectedTask.value!.reminderTime = pickedTime;
-      selectedTask.refresh();
-      controllers.saveTask();
-      dueTimeController.text = pickedTime.format(context);
-    }
   }
 
   void showAddSubtaskDialog(BuildContext context) {
@@ -67,7 +58,7 @@ class TaskDetailControllers extends GetxController{
       titlePadding: EdgeInsets.symmetric(vertical: 10),
       titleStyle: Theme.of(context).textTheme.displayMedium,
       content: Card(
-        child: TextField(
+        child: TextFormField(
           controller: textController,
           decoration: InputDecoration(
             contentPadding: EdgeInsets.symmetric(horizontal: 10),
@@ -75,6 +66,12 @@ class TaskDetailControllers extends GetxController{
             hintStyle: Theme.of(context).textTheme.bodyMedium,
             border: InputBorder.none
           ),
+          validator: (value) {
+            if (value == null || value.trim().isEmpty) {
+              return 'Enter subtask title';
+            }
+            return null;
+          },
         ),
       ),
       textConfirm: 'Add',
@@ -90,8 +87,10 @@ class TaskDetailControllers extends GetxController{
   }
 
   void showTaskMenu() {
+    if (selectedTask.value == null) return;
+
     Get.bottomSheet(
-      TaskMenu(),
+      TaskMenu(task: selectedTask.value!,),
       isScrollControlled: true
     );
   }

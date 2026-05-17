@@ -53,9 +53,14 @@ class TaskControllers extends GetxController{
     }
   }
 
-  void updateTask() {
-    saveTask();
-    tasks.refresh();
+  void updateTask(TaskModel updatedTask) {
+    final index = tasks.indexWhere((task) => task.id == updatedTask.id);
+    if (index != -1) {
+      tasks[index] = updatedTask;
+      tasks.refresh();
+    }
+    // saveTask();
+    // tasks.refresh();
   }
 
   void deleteTask(String taskId) {

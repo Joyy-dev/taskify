@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:taskify/presentation/controllers/task_controllers.dart';
-import 'package:taskify/presentation/controllers/task_detail_controllers.dart';
+import 'package:taskify/data/task_model.dart';
+// import 'package:taskify/features/task_form.dart';
+// import 'package:taskify/presentation/controllers/task_controllers.dart';
+// import 'package:taskify/presentation/controllers/task_detail_controllers.dart';
+import 'package:taskify/presentation/screens/new_task_screen.dart';
 import 'package:taskify/presentation/widget/custom_container.dart';
 import 'package:taskify/presentation/widget/special_container.dart';
 
 class TaskMenu extends StatelessWidget {
-  const TaskMenu({super.key});
+  final TaskModel task;
+  const TaskMenu({super.key, required this.task});
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.find<TaskControllers>();
-    final controllers = Get.find<TaskDetailControllers>();
-    final task = controllers.selectedTask.value!;
+    //final controller = Get.find<TaskControllers>();
+    
     return CustomContainer(
       height: 300,
       child: Column(
@@ -29,6 +32,13 @@ class TaskMenu extends StatelessWidget {
                 'Update Task'
               ),
               trailing: Icon(Icons.chevron_right),
+              onTap: () {
+                Get.back();
+                Get.to(() => NewTaskScreen(
+                  task: task,
+                )
+                );
+              },
             ),
           ),
           const SizedBox(height: 20,),
@@ -40,7 +50,7 @@ class TaskMenu extends StatelessWidget {
               ),
               trailing: Icon(Icons.chevron_right),
               onTap: () {
-                controller.deleteTask(task.id);
+                //controller.confirmDeleteTask(context, task.id);
               },
             ),
           )

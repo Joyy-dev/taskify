@@ -62,7 +62,10 @@ class UpcomingTasks extends StatelessWidget {
                           ),
                         ),
                         IconButton(
-                          onPressed: () => controller.showTaskMenu(), 
+                          onPressed: () {
+                            controller.setTask(task);
+                            controller.showTaskMenu();
+                          }, 
                           icon: Icon(Icons.more_vert, color: Color(0xFF565e74),)
                         )
                       ],

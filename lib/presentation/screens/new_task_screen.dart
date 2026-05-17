@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:taskify/data/task_model.dart';
 import 'package:taskify/features/task_form.dart';
 import 'package:taskify/presentation/controllers/task_form_controllers.dart';
 import 'package:taskify/presentation/widget/custom_screen.dart';
 
 class NewTaskScreen extends StatelessWidget {
-  NewTaskScreen({super.key});
+  final TaskModel? task;
+  NewTaskScreen({super.key, this.task});
 
   final TaskFormControllers controllers = Get.put(TaskFormControllers());
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<TaskFormControllers>();
+    controller.initializeTask(task);
+    final isEditing = task != null;
     return CustomScreen(
       title: 'Taskify', 
       icons: IconButton(
@@ -21,11 +26,11 @@ class NewTaskScreen extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              'Create New Task',
+              isEditing ? 'Update Your Task' :'Create New Task',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
             Text(
-              'Define Your Next milestone and stay in flow',
+              isEditing ? 'Edit your milestone and stay in flow' : 'Define Your Next milestone and stay in flow',
               style: Theme.of(context).textTheme.bodyMedium,
             ),
             const SizedBox(height: 30,),
@@ -37,7 +42,7 @@ class NewTaskScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
                 border: Border.all(color: Color(0xFF68788f))
               ),
-              child: ListTile(
+              child:isEditing ? null : ListTile(
                 leading: CircleAvatar(
                   backgroundColor: Theme.of(context).colorScheme.onTertiary,
                   child: Icon(
