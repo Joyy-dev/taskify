@@ -20,7 +20,6 @@ class TaskFormControllers extends GetxController{
   final TaskControllers taskControllers = Get.find();
   final selectedTask = Rxn<TaskModel>();
   TaskModel? editingTask;
-  bool _isInitialized = false;
 
   void setCategory(Category value) {
     selectedCategory.value = value;
@@ -52,16 +51,18 @@ class TaskFormControllers extends GetxController{
   Future<void> selectReminderTime(BuildContext context) async {
     final pickedTime = await showTimePicker(
       context: context, 
-      initialTime: selectedTask.value?.reminderTime ?? TimeOfDay.now()
+      initialTime: selectedTime.value ?? TimeOfDay.now()
     );
 
     if (!context.mounted) return;
 
     if (pickedTime != null) {
-      selectedTask.value!.reminderTime = pickedTime;
-      selectedTask.refresh();
-      taskControllers.saveTask();
+      selectedTime.value = pickedTime;
+      //selectedTask.value!.reminderTime = pickedTime;
+      //selectedTask.refresh();
+      
       dueTimeController.text = pickedTime.format(context);
+      taskControllers.saveTask();
     }
   }
 
@@ -93,10 +94,11 @@ class TaskFormControllers extends GetxController{
       description: descriptionController.text, 
       dueDate: selectedDate.value ?? DateTime.now(), 
       priority: selectedPriority.value ?? PriorityLevels.low,
-      reminderTime: TimeOfDay.now()
+      reminderTime: selectedTime.value!
     );
     if (editingTask == null) {
       taskControllers.addTask(task);
+      clearForm();
       Get.back();
       Get.snackbar(
         'Success', 
@@ -105,23 +107,26 @@ class TaskFormControllers extends GetxController{
       );
     } else {
       taskControllers.updateTask(task);
+      clearForm();
+      Get.back();
       Get.snackbar(
         'Updated', 
         'Task updated successfully',
         snackPosition: SnackPosition.TOP
       );
     }
-    clearForm();
-    Get.back();   
   }
 
   void clearForm() {
     taskNameController.clear();
     descriptionController.clear();
     dueDateController.clear();
+    dueTimeController.clear();
     selectedPriority.value = null;
     selectedCategory.value = Category.work;
     selectedDate.value = null;
+    selectedTime.value = null;
+    editingTask = null;
   }
 
   @override
@@ -129,6 +134,7 @@ class TaskFormControllers extends GetxController{
     taskNameController.dispose();
     dueDateController.dispose();
     descriptionController.dispose();
+    dueTimeController.dispose();
     super.onClose();
   }
 
@@ -142,11 +148,8 @@ class TaskFormControllers extends GetxController{
     clearForm();
   }
 
-  void initializeTask(TaskModel? task) {
-    if (_isInitialized || task == null) {
-      return;
-    }
-    _isInitialized = true;
+  void initializeTask(TaskModel? task, BuildContext context) {
+    if (task == null) return;
 
     editingTask = task;
     taskNameController.text = task.taskTitle;
@@ -155,5 +158,9 @@ class TaskFormControllers extends GetxController{
     selectedPriority.value = task.priority;
     selectedDate.value = task.dueDate;
     selectedTime.value = task.reminderTime;
+    dueDateController.text = '${task.dueDate.day.toString().padLeft(2, '0')}/'
+    '${task.dueDate.month.toString().padLeft(2, '0')}/'
+    '${task.dueDate.year}'; 
+    dueTimeController.text = task.reminderTime.format(context);
   }
 }

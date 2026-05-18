@@ -9,6 +9,7 @@ import 'package:taskify/data/task_model.dart';
 class TaskControllers extends GetxController{
   var tasks = <TaskModel>[].obs;
   final box = GetStorage();
+  final searchQuery = ''.obs;
 
   @override
   void onInit() {
@@ -59,8 +60,6 @@ class TaskControllers extends GetxController{
       tasks[index] = updatedTask;
       tasks.refresh();
     }
-    // saveTask();
-    // tasks.refresh();
   }
 
   void deleteTask(String taskId) {
@@ -98,6 +97,11 @@ class TaskControllers extends GetxController{
 
   List<TaskModel> get completedTodayTask {
     return todayTask.where((task) => task.isCompleted).toList();
+  }
+
+  int get dailyRemainingTask{
+    if (todayTask.isEmpty) return 0;
+    return todayTask.length - completedTodayTask.length;
   }
 
   double get dailyProgress {
@@ -140,5 +144,9 @@ class TaskControllers extends GetxController{
       return aDateTime.compareTo(bDatTime);      
     });
     return filteredTasks;
+  }
+
+  void updateSearch(String value) {
+    searchQuery.value = value;
   }
 }

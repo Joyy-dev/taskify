@@ -15,7 +15,7 @@ class TaskForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.find<TaskFormControllers>();
-    controller.initializeTask(task);
+    controller.initializeTask(task, context);
     return Form(
       key: controller.formKey,
       child: Column(

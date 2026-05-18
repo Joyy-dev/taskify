@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:taskify/data/task_model.dart';
+import 'package:taskify/presentation/controllers/task_controllers.dart';
 // import 'package:taskify/features/task_form.dart';
 // import 'package:taskify/presentation/controllers/task_controllers.dart';
 // import 'package:taskify/presentation/controllers/task_detail_controllers.dart';
@@ -14,7 +15,7 @@ class TaskMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //final controller = Get.find<TaskControllers>();
+    final controller = Get.find<TaskControllers>();
     
     return CustomContainer(
       height: 300,
@@ -50,7 +51,7 @@ class TaskMenu extends StatelessWidget {
               ),
               trailing: Icon(Icons.chevron_right),
               onTap: () {
-                //controller.confirmDeleteTask(context, task.id);
+                controller.confirmDeleteTask(context, task.id);
               },
             ),
           )

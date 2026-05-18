@@ -14,7 +14,7 @@ class NewTaskScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.find<TaskFormControllers>();
-    controller.initializeTask(task);
+    controller.initializeTask(task, context);
     final isEditing = task != null;
     return CustomScreen(
       title: 'Taskify', 

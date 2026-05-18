@@ -25,7 +25,7 @@ class UpcomingTasks extends StatelessWidget {
         ),
         const SizedBox(height: 5,),
         Text(
-          '4 tasks remaining for today',
+          '${controllers.dailyRemainingTask} tasks remaining for today',
         ),
         const SizedBox(height: 20,),
         SearchAndFilter(),

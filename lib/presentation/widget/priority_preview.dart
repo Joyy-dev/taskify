@@ -33,11 +33,6 @@ class PriorityPreview extends StatelessWidget {
               controller.setPriority(value);
             })
           ),
-          PriorityLevel(
-            onSelected: (value) {
-              controller.selectedPriority.value = value;
-            },
-          ),
           const SizedBox(height: 20,),
           Container(
             decoration: BoxDecoration(

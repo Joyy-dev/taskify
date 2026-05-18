@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:taskify/core/enums/task_time.dart';
+import 'package:taskify/core/enums/task_filter.dart';
 
 class ProgressContainer extends StatefulWidget {
   const ProgressContainer({super.key});
@@ -12,7 +12,7 @@ class _ProgressContainerState extends State<ProgressContainer> {
   final int onSelected = 0;
   @override
   Widget build(BuildContext context) {
-    final cat = TaskTime.values;
+    final cat = TaskFilter.values;
     return SizedBox(
       height: 70,
       child: ListView.builder(
