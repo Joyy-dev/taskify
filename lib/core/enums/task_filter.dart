@@ -1,9 +1,9 @@
 enum TaskFilter {
   all('All'),
   progress('In Progress'),
-  due('Due Date'),
+  due('Due Soon'),
   upcoming('Upcoming'),
-  completed('completed');
+  completed('Completed');
 
   final String text;
   const TaskFilter(this.text);

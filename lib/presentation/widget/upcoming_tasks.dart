@@ -5,7 +5,7 @@ import 'package:taskify/core/services/category_color.dart';
 import 'package:taskify/presentation/controllers/task_controllers.dart';
 import 'package:taskify/presentation/controllers/task_detail_controllers.dart';
 import 'package:taskify/presentation/screens/task_detail_screens.dart';
-import 'package:taskify/presentation/widget/task_category.dart';
+import 'package:taskify/presentation/widget/total_task_filter.dart';
 import 'package:taskify/presentation/widget/search_and_filter.dart';
 import 'package:taskify/presentation/widget/task_container.dart';
 
@@ -30,7 +30,7 @@ class UpcomingTasks extends StatelessWidget {
         const SizedBox(height: 20,),
         SearchAndFilter(),
         const SizedBox(height: 30,),
-        ProgressContainer(),
+        TotalTaskFilter(),
         const SizedBox(height: 30,),
         SizedBox(
           height: 500,
