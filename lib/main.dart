@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:taskify/core/services/notification_service.dart';
 import 'package:taskify/core/theme/app_theme.dart';
 import 'package:taskify/presentation/controllers/task_controllers.dart';
 import 'package:taskify/presentation/controllers/task_detail_controllers.dart';
@@ -11,6 +12,7 @@ import 'package:taskify/presentation/widget/navigation.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
+  await NotificationService.init();
   // final box = GetStorage();
   // box.erase();
   Get.put(ThemeControllers());

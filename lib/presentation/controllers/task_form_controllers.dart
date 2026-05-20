@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:taskify/core/enums/category.dart';
 import 'package:taskify/core/enums/priority_levels.dart';
+import 'package:taskify/core/services/notification_service.dart';
 import 'package:taskify/data/task_model.dart';
 import 'package:taskify/presentation/controllers/task_controllers.dart';
 import 'package:uuid/uuid.dart';
@@ -67,7 +68,7 @@ class TaskFormControllers extends GetxController{
   }
 
 
-  void saveOrUpdateTask() {
+  Future<void> saveOrUpdateTask() async {
     final uuid = Uuid();
     if (!formKey.currentState!.validate()) return;
     if (selectedDate.value == null) {
@@ -115,6 +116,14 @@ class TaskFormControllers extends GetxController{
         snackPosition: SnackPosition.TOP
       );
     }
+
+    final reminderDate = combineDateAndTime();
+    await NotificationService.scheduleNotification(
+      id: task.id, 
+      title: task.taskTitle, 
+      body: 'Task reminder: ${task.description}', 
+      scheduleDate: reminderDate
+    );
   }
 
   void clearForm() {
@@ -162,5 +171,18 @@ class TaskFormControllers extends GetxController{
     '${task.dueDate.month.toString().padLeft(2, '0')}/'
     '${task.dueDate.year}'; 
     dueTimeController.text = task.reminderTime.format(context);
+  }
+
+  DateTime combineDateAndTime() {
+    final date = selectedDate.value!;
+    final time = selectedTime.value!;
+
+    return DateTime(
+      date.year,
+      date.month,
+      date.day,
+      time.hour,
+      time.minute
+    );
   }
 }
