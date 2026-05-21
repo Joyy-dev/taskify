@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:taskify/core/enums/task_filter.dart';
-import 'package:taskify/presentation/controllers/task_controllers.dart';
+import 'package:taskify/presentation/controllers/search_controllers.dart';
 
 class TotalTaskFilter extends StatefulWidget {
   const TotalTaskFilter({super.key});
@@ -15,7 +15,7 @@ class _ProgressContainerState extends State<TotalTaskFilter> {
   @override
   Widget build(BuildContext context) {
     final filter = TaskFilter.values;
-    final controller = Get.find<TaskControllers>();
+    final controller = Get.find<SearchControllers>();
     return SizedBox(
       height: 70,
       child: ListView.builder(

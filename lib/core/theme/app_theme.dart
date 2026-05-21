@@ -202,7 +202,7 @@ class AppTheme {
       backgroundColor: Colors.black,
       titleTextStyle: TextStyle(
         fontSize: 23,
-        color: Color(0xFF8990a8),
+        color: Color(0xFFa0a3ff),
         fontWeight: FontWeight.bold
       ),
       iconTheme: IconThemeData(

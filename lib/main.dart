@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:taskify/core/services/notification_service.dart';
 import 'package:taskify/core/theme/app_theme.dart';
+import 'package:taskify/presentation/controllers/search_controllers.dart';
 import 'package:taskify/presentation/controllers/task_controllers.dart';
 import 'package:taskify/presentation/controllers/task_detail_controllers.dart';
 import 'package:taskify/presentation/controllers/task_form_controllers.dart';
@@ -19,6 +20,7 @@ void main() async {
   Get.put(TaskControllers());
   Get.put(TaskDetailControllers());
   Get.put(TaskFormControllers());
+  Get.put(SearchControllers());
   runApp(MyApp());
 }
 

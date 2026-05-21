@@ -3,15 +3,14 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:taskify/core/enums/category.dart';
 import 'package:taskify/core/enums/priority_levels.dart';
-import 'package:taskify/core/enums/task_filter.dart';
+import 'package:taskify/data/notification_model.dart';
 import 'package:taskify/data/subtask_model.dart';
 import 'package:taskify/data/task_model.dart';
 
 class TaskControllers extends GetxController{
   var tasks = <TaskModel>[].obs;
   final box = GetStorage();
-  final searchQuery = ''.obs;
-  final selectedFilter = TaskFilter.all.obs;
+  final notification = <NotificationModel>[].obs;
 
   @override
   void onInit() {
@@ -135,7 +134,7 @@ class TaskControllers extends GetxController{
         a.reminderTime.minute
       );
 
-      final bDatTime = DateTime(
+      final bDateTime = DateTime(
         b.dueDate.year,
         b.dueDate.month,
         b.dueDate.day,
@@ -143,74 +142,8 @@ class TaskControllers extends GetxController{
         b.reminderTime.minute
       );
 
-      return aDateTime.compareTo(bDatTime);      
+      return aDateTime.compareTo(bDateTime);      
     });
     return filteredTasks;
-  }
-
-  void updateSearch(String value) {
-    searchQuery.value = value;
-  }
-
-  void setFilter(TaskFilter filter) {
-    selectedFilter.value = filter;
-  }
-
-  List<TaskModel> get filteredTasks {
-    List<TaskModel> result = tasks;
-
-    if (searchQuery.value.isNotEmpty) {
-      result = result.where((task) {
-        return task.taskTitle.toLowerCase().contains(searchQuery.value.toLowerCase());
-      }).toList();
-    }
-    switch (selectedFilter.value) {
-      case TaskFilter.completed:
-      result = result.where((task) => task.isCompleted).toList();
-      break;
-      case TaskFilter.progress:
-      result = result.where((task) => !task.isCompleted).toList();
-      break;
-      case TaskFilter.due:
-      final now = DateTime.now();
-      result = result.where((task) {
-        return task.dueDate.day == now.day && task.dueDate.month == now.month && task.dueDate.year == now.year;
-      }).toList();
-      break;
-      case TaskFilter.upcoming:
-      final now = DateTime.now();
-      result = result.where((task){
-        final taskDateTime = DateTime(
-          task.dueDate.year,
-          task.dueDate.month,
-          task.dueDate.day,
-          task.dueDate.hour,
-          task.dueDate.minute
-        );
-        final difference = taskDateTime.difference(now).inHours;
-        return !task.isCompleted && difference >= 0 && difference <= 48;
-      }).toList();
-      break;
-
-      case TaskFilter.all: break;
-    }
-    return result;
-  }
-
-  int gettaskFilterCount(TaskFilter filter) {
-    switch (filter) {
-      case TaskFilter.all:
-      return tasks.length;
-      case TaskFilter.completed:
-      return tasks.where((task) => task.isCompleted).length;
-      case TaskFilter.due:
-      return tasks.where((task) => !task.isCompleted).length;
-      case TaskFilter.progress:
-      final now = DateTime.now();
-      return tasks.where((task) {
-        return task.dueDate.day == now.day && task.dueDate.month == now.month && task.dueDate.year == now.year;
-      }).length;
-      case TaskFilter.upcoming:return upComingTask.length;
-    }
   }
 }
