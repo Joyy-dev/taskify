@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:taskify/presentation/controllers/navigation_controllers.dart';
-import 'package:taskify/presentation/screens/calendar_screens.dart';
 import 'package:taskify/presentation/screens/home_screens.dart';
 import 'package:taskify/presentation/screens/settings_screens.dart';
 import 'package:taskify/presentation/screens/task_list_screen.dart';
+import 'package:taskify/presentation/screens/team_screens.dart';
 
 class Navigation extends StatefulWidget {
   const Navigation({super.key});
@@ -19,7 +19,7 @@ class _NavigationState extends State<Navigation> {
   final List<Widget> _screens = [
     HomeScreens(),
     TaskListScreen(),
-    CalendarScreens(),
+    TeamScreens(),
     SettingsScreens()
   ];
 
@@ -39,8 +39,8 @@ class _NavigationState extends State<Navigation> {
             label: 'Tasks'
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_month),
-            label: 'Calendar'
+            icon: Icon(Icons.people),
+            label: 'Team'
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),

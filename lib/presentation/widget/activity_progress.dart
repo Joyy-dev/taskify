@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:taskify/presentation/controllers/task_controllers.dart';
+import 'package:taskify/presentation/widget/circular_progress.dart';
 
 class ActivityProgress extends StatelessWidget {
   const ActivityProgress({super.key});
@@ -18,15 +19,8 @@ class ActivityProgress extends StatelessWidget {
           Stack(
             alignment: Alignment.center,
             children: [
-              SizedBox(
-                height: 150,
-                width: 150,
-                child: CircularProgressIndicator(
-                  strokeWidth: 10,
-                  value: progress,
-                  backgroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
-                  valueColor: AlwaysStoppedAnimation(Theme.of(context).colorScheme.primary),
-                ),
+              CircularProgress(
+                value: progress
               ),
               Text(
                 '${(progress * 100).toInt()}%',

@@ -50,57 +50,58 @@ class TaskSearchResults extends StatelessWidget {
               ),
             );
           } else {
-            return SizedBox(
-              height: 400,
-              child: ListView.builder(
-                itemCount: controller.searchedTasks.length,
-                itemBuilder: (context, index) {
-                  final task = controller.searchedTasks[index];
-                  final color = getLevelColor(context, task.priority);
-                  final category = categoryTag[index];
-                  return CustomContainer(
-                    margin: EdgeInsets.only(bottom: 15),
-                    child: ListTile(
-                      leading: Container(
-                        height: 80,
-                        width: 4,
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.primary,
-                          borderRadius: BorderRadius.circular(10)
+            return ListView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: controller.searchedTasks.length,
+              itemBuilder: (context, index) {
+                final task = controller.searchedTasks[index];
+                final color = getLevelColor(context, task.priority);
+                final category = categoryTag[index];
+                return CustomContainer(
+                  margin: EdgeInsets.only(bottom: 15),
+                  child: ListTile(
+                    minLeadingWidth: 4,
+                    leading: Container(
+                      height: 80,
+                      width: 4,
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.primary,
+                        borderRadius: BorderRadius.circular(10)
+                      ),
+                    ),
+                    title: Text(
+                      task.taskTitle
+                    ),
+                    subtitle: Row(
+                      children: [
+                        Icon(Icons.calendar_today_outlined, size: 20,),
+                        const SizedBox(width: 5,),
+                        Text(
+                          DateFormat('MMM dd, yyyy').format(task.dueDate)
                         ),
+                        const SizedBox(width: 20,),
+                        Icon(category.icon, size: 20,),
+                        const SizedBox(width: 5,),
+                        Text(
+                          category.label
+                        )
+                      ],
+                    ),
+                    trailing: Container(
+                      padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                      decoration: BoxDecoration(
+                        color: color,
+                        borderRadius: BorderRadius.circular(9)
                       ),
-                      title: Text(
-                        task.taskTitle
+                      child: Text(
+                        task.priority.name.toUpperCase(),
+                        style: Theme.of(context).textTheme.displaySmall,
                       ),
-                      subtitle: Row(
-                        children: [
-                          Icon(Icons.calendar_today_outlined),
-                          const SizedBox(width: 5,),
-                          Text(
-                            DateFormat('MMM dd, yyyy').format(task.dueDate)
-                          ),
-                          const SizedBox(width: 10,),
-                          Icon(category.icon),
-                          Text(
-                            category.label
-                          )
-                        ],
-                      ),
-                      trailing: Container(
-                        padding: EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
-                          color: color,
-                          borderRadius: BorderRadius.circular(10)
-                        ),
-                        child: Text(
-                          task.priority.name.toUpperCase(),
-                          style: Theme.of(context).textTheme.displaySmall,
-                        ),
-                      ),
-                    )
-                  );
-                },
-              ),
+                    ),
+                  )
+                );
+              },
             );
           }      
         })

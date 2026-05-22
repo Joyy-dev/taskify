@@ -200,9 +200,10 @@ class AppTheme {
   static final darkMode = ThemeData(
     appBarTheme: AppBarTheme(
       backgroundColor: Colors.black,
+      foregroundColor: Color(0xFFbdc2ff),
       titleTextStyle: TextStyle(
         fontSize: 23,
-        color: Color(0xFFa0a3ff),
+        color: Color(0xFFbdc2ff),
         fontWeight: FontWeight.bold
       ),
       iconTheme: IconThemeData(

@@ -16,25 +16,26 @@ class UpcomingTasks extends StatelessWidget {
   Widget build(BuildContext context) {
     final TaskControllers controllers = Get.find();
     final TaskDetailControllers controller = Get.find();
-    return Obx(() => Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Focus Mode',
-          style: Theme.of(context).textTheme.headlineLarge,
-        ),
-        const SizedBox(height: 5,),
-        Text(
-          '${controllers.dailyRemainingTask} tasks remaining for today',
-        ),
-        const SizedBox(height: 20,),
-        SearchAndFilter(),
-        const SizedBox(height: 30,),
-        TotalTaskFilter(),
-        const SizedBox(height: 30,),
-        SizedBox(
-          height: 500,
-          child: ListView.builder(
+    return Obx(() => SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Focus Mode',
+            style: Theme.of(context).textTheme.headlineLarge,
+          ),
+          const SizedBox(height: 5,),
+          Text(
+            '${controllers.dailyRemainingTask} tasks remaining for today',
+          ),
+          const SizedBox(height: 20,),
+          SearchAndFilter(),
+          const SizedBox(height: 30,),
+          TotalTaskFilter(),
+          const SizedBox(height: 30,),
+          ListView.builder(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
             itemCount: controllers.tasks.length,
             itemBuilder: (context, index) {
               final task = controllers.tasks[index];
@@ -107,8 +108,8 @@ class UpcomingTasks extends StatelessWidget {
               );
             },
           ),
-        ),
-      ],
+        ],
+      ),
     ));
   }
 }
