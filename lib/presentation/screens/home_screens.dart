@@ -20,10 +20,7 @@ class _HomeScreensState extends State<HomeScreens> {
   Widget build(BuildContext context) {
     return CustomScreen(
       title: 'Taskify', 
-      icons: IconButton(
-        onPressed: () {}, 
-        icon: Icon(Icons.grid_view_sharp)
-      ),
+      leading: Icon(Icons.grid_view_sharp),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Get.to(

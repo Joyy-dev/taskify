@@ -18,10 +18,6 @@ class NewTaskScreen extends StatelessWidget {
     final isEditing = task != null;
     return CustomScreen(
       title: 'Taskify', 
-      icons: IconButton(
-        onPressed: () => Get.back(), 
-        icon: Icon(Icons.arrow_back)
-      ),
       child: SingleChildScrollView(
         child: Column(
           children: [

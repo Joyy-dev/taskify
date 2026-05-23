@@ -14,7 +14,7 @@ class SearchResultsScreen extends StatelessWidget {
     final controller = Get.find<SearchControllers>();
     return Scaffold(
       appBar: AppBar(
-        title: Text('Search Results'),
+        title: Text('Taskify'),
         actions: [
           Icon(Icons.format_list_bulleted_sharp)
         ],

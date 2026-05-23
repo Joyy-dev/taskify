@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
+import 'package:taskify/presentation/screens/new_team_screens.dart';
 import 'package:taskify/presentation/widget/custom_screen.dart';
 import 'package:taskify/presentation/widget/team_activity.dart';
 import 'package:taskify/presentation/widget/team_member_list.dart';
@@ -11,10 +13,7 @@ class TeamScreens extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomScreen(
       title: 'Taskify', 
-      icons: IconButton(
-        onPressed: () {}, 
-        icon: Icon(Icons.grid_view)
-      ),
+      leading: Icon(Icons.grid_view),
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -37,7 +36,9 @@ class TeamScreens extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 ElevatedButton(
-                  onPressed: () {}, 
+                  onPressed: () {
+                    Get.to(() => NewTeamScreens());
+                  }, 
                   child: Row(
                     children: [
                       Icon(Icons.person_add_alt),

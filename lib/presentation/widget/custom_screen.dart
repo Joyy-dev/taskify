@@ -5,13 +5,13 @@ import 'package:taskify/presentation/controllers/theme_controllers.dart';
 class CustomScreen extends StatelessWidget {
   final String title;
   final Widget child;
-  final IconButton? icons;
+  final Widget? leading;
   final Widget? floatingActionButton;
 
   CustomScreen({
     required this.title, 
     required this.child, 
-    this.icons,
+    this.leading,
     this.floatingActionButton,
     super.key
   });
@@ -22,7 +22,7 @@ class CustomScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: icons,
+        leading: leading,
         title: Text(
           title
         ),
