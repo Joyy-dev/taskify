@@ -4,6 +4,7 @@ class CustomForm extends StatelessWidget {
   final String? hint;
   final String tag;
   final IconButton? icon;
+  final Widget? prefixIcon;
   final int? line;
   final TextEditingController controller;
   final String? Function(String?)? validator;
@@ -12,6 +13,7 @@ class CustomForm extends StatelessWidget {
     this.hint,
     required this.tag,
     this.icon,
+    this.prefixIcon,
     this.line,
     required this.controller,
     this.validator,
@@ -42,7 +44,8 @@ class CustomForm extends StatelessWidget {
                 color: Color(0xFF777681)
               ),
               contentPadding: EdgeInsets.all(13),
-              suffixIcon: icon
+              suffixIcon: icon,
+              prefixIcon: prefixIcon
             ),
           ),
         ),
