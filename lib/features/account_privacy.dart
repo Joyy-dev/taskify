@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:taskify/presentation/widget/custom_container.dart';
-import 'package:taskify/presentation/widget/special_container.dart';
+import 'package:taskify/presentation/shared/widget/custom_container.dart';
+import 'package:taskify/presentation/shared/widget/special_container.dart';
 
 class AccountPrivacy extends StatelessWidget {
   const AccountPrivacy({super.key});

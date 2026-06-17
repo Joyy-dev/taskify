@@ -4,9 +4,9 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/route_manager.dart';
 import 'package:taskify/core/enums/category.dart';
 import 'package:taskify/data/task_model.dart';
-import 'package:taskify/presentation/widget/custom_form.dart';
-import 'package:taskify/presentation/widget/priority_level.dart';
-import 'package:taskify/presentation/controllers/task_form_controllers.dart';
+import 'package:taskify/presentation/shared/widget/custom_form.dart';
+import 'package:taskify/presentation/individual/widget/priority_level.dart';
+import 'package:taskify/presentation/shared/controllers/task_form_controllers.dart';
 
 class TaskForm extends StatelessWidget {
   final TaskModel? task;

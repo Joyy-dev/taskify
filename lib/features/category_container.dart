@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:taskify/core/enums/category.dart';
-import 'package:taskify/presentation/controllers/task_controllers.dart';
+import 'package:taskify/presentation/individual/controllers/task_controllers.dart';
 
 class CategoryContainer extends StatelessWidget {
   const CategoryContainer({super.key});

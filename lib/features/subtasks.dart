@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
-import 'package:taskify/presentation/controllers/task_detail_controllers.dart';
-import 'package:taskify/presentation/widget/custom_container.dart';
-import 'package:taskify/presentation/widget/subtask_list.dart';
+import 'package:taskify/presentation/individual/controllers/task_detail_controllers.dart';
+import 'package:taskify/presentation/shared/widget/custom_container.dart';
+import 'package:taskify/presentation/individual/widget/subtask_list.dart';
 
 class Subtasks extends StatelessWidget {
   Subtasks({super.key});
