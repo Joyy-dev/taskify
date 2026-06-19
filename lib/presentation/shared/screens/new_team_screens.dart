@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:taskify/presentation/shared/widget/custom_screen.dart';
+import 'package:taskify/presentation/shared/widget/project_access.dart';
 import 'package:taskify/presentation/team/widget/team_form.dart';
 
 class NewTeamScreens extends StatelessWidget {
@@ -42,6 +43,37 @@ class NewTeamScreens extends StatelessWidget {
             ),
             const SizedBox(height: 30,),
             TeamForm(),
+            const SizedBox(height: 20,),
+            ProjectAccess(),
+            const SizedBox(height: 20,),
+            Row(
+              children: [
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: () {}, 
+                    child: Text(
+                      'Send Invitations'
+                    )
+                  ),
+                ),
+                const SizedBox(width: 10,),
+                Expanded(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(
+                        width: 1,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant
+                      )
+                    ),
+                    child: TextButton(
+                      onPressed: () {}, 
+                      child: Text('Cancel')
+                    ),
+                  ),
+                )
+              ],
+            )
           ],
         ),
       )
