@@ -1,0 +1,76 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:taskify/features/tasks/presentation/screens/new_task_screen.dart';
+import 'package:taskify/features/tasks/presentation/widgets/activity_progress.dart';
+import 'package:taskify/features/settings/presentation/widget/category_container.dart';
+import 'package:taskify/shared/widgets/custom_screen.dart';
+import 'package:taskify/features/tasks/presentation/widgets/focus_container.dart';
+import 'package:taskify/features/tasks/presentation/widgets/insights.dart';
+import 'package:taskify/features/tasks/presentation/widgets/upcoming_deadline.dart';
+
+class HomeScreens extends StatefulWidget {
+  const HomeScreens({super.key});
+
+  @override
+  State<HomeScreens> createState() => _HomeScreensState();
+}
+
+class _HomeScreensState extends State<HomeScreens> {
+  @override
+  Widget build(BuildContext context) {
+    return CustomScreen(
+      title: 'Taskify', 
+      leading: Icon(Icons.grid_view_sharp),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Get.to(
+            () => NewTaskScreen()
+          );
+        },
+        child: Icon(Icons.add),
+      ),
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            FocusContainer(),
+            const SizedBox(height: 25,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Categories',
+                  style: Theme.of(context).textTheme.headlineMedium,
+                ),
+                TextButton(
+                  onPressed: () {}, 
+                  child: Text(
+                    'View All'
+                  )
+                )
+              ],
+            ),
+            const SizedBox(height: 10,),
+            CategoryContainer(),
+            const SizedBox(height: 45,),
+            ActivityProgress(),
+            const SizedBox(height: 30,),
+            Text(
+              'Upcoming Deadlines',
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+            const SizedBox(height: 10,),
+            UpcomingDeadline(),
+            const SizedBox(height: 30,),
+            Text(
+              'Smart Insights',
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+            const SizedBox(height: 10,),
+            Insights()
+          ],
+        ),
+      )
+    );
+  }
+}

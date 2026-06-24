@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:taskify/core/services/notification_service.dart';
-import 'package:taskify/core/theme/app_theme.dart';
-import 'package:taskify/presentation/shared/controllers/search_controllers.dart';
-import 'package:taskify/presentation/individual/controllers/task_controllers.dart';
-import 'package:taskify/presentation/individual/controllers/task_detail_controllers.dart';
-import 'package:taskify/presentation/shared/controllers/task_form_controllers.dart';
-import 'package:taskify/presentation/shared/controllers/theme_controllers.dart';
-import 'package:taskify/presentation/shared/widget/navigation.dart';
+import 'package:taskify/app/themes/app_theme.dart';
+import 'package:taskify/features/auth/presentation/controller/auth_controller.dart';
+import 'package:taskify/features/search/presentation/controllers/search_controllers.dart';
+import 'package:taskify/features/tasks/presentation/controllers/task_controllers.dart';
+import 'package:taskify/features/tasks/presentation/controllers/task_detail_controllers.dart';
+import 'package:taskify/features/tasks/presentation/controllers/task_form_controllers.dart';
+import 'package:taskify/shared/controllers/theme_controllers.dart';
+import 'package:taskify/shared/widgets/navigation.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,6 +22,7 @@ void main() async {
   Get.put(TaskDetailControllers());
   Get.put(TaskFormControllers());
   Get.put(SearchControllers());
+  Get.put(AuthController());
   runApp(MyApp());
 }
 
