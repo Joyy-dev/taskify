@@ -15,7 +15,9 @@ class AuthScreens extends StatelessWidget {
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-            child: Container(
+            child: Obx(() {
+              final login = controller.isLogin.value;
+              return Container(
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
               decoration: BoxDecoration(
                 color: Theme.of(context).colorScheme.surface,
@@ -38,106 +40,143 @@ class AuthScreens extends StatelessWidget {
                       fit: BoxFit.cover,
                     ),
                   ),
-                  //if (controller.isLogin)              
                   Text(
-                    'Create Account',
+                    login ? 'Welcome back' : 'Create Account',
                     style: Theme.of(context).textTheme.headlineMedium,
                   ),
                   const SizedBox(height: 5,),
                   Text(
-                    'Get started for free today',
+                    login ? 'Sign in to your Taskify account to continue your work' : 'Get started for free today',
                     style: Theme.of(context).textTheme.bodySmall,
+                    textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 20,),
                   AuthOption(),
                   const SizedBox(height: 20,),
-                  CustomForm(
-                    tag: 'Full Name', 
-                    hint: 'John Doe',
-                    prefixIcon: Icon(Icons.person),
-                    controller: controller.nameController
-                  ),
-                  const SizedBox(height: 20,),
-                  CustomForm(
-                    tag: 'Email Address',
-                    hint: 'john@taskify.com', 
-                    prefixIcon: Icon(Icons.email_outlined),
-                    controller: controller.emailController
-                  ),
-                  const SizedBox(height: 20,),
-                  CustomForm(
-                    tag: 'Password', 
-                    hint:  '********',
-                    prefixIcon: Icon(Icons.lock_outline),
-                    controller: controller.passwordController
-                  ),
-                  const SizedBox(height: 20,),
-                  Row(
-                    children: [
-                      Checkbox(
-                        value: false,               
-                        onChanged: (value) {
-                          //
+                  Form(
+                    key: controller.formKey,
+                    child: Column(
+                      children: [
+                        if(!login)
+                        CustomForm(
+                          tag: 'Full Name', 
+                          hint: 'John Doe',
+                          prefixIcon: Icon(Icons.person),
+                        controller: controller.nameController
+                      ),
+                      const SizedBox(height: 20,),
+                      CustomForm(
+                        tag: 'Email Address',
+                        hint: 'john@taskify.com', 
+                        prefixIcon: Icon(Icons.email_outlined),
+                        controller: controller.emailController,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'An Email Address is required';
+                          }
+                          if (!GetUtils.isEmail(value)) {
+                            return 'Invalid credential';
+                          }
+                          return null;
                         },
                       ),
-                      Expanded(
-                        child: RichText(
-                          text: TextSpan(
-                            text: 'I agree to the ',
-                            style: Theme.of(context).textTheme.bodySmall,
-                            children: [
-                              TextSpan(
-                                text: 'Terms of Services ',
-                                style: Theme.of(context).textTheme.headlineSmall
-                              ),
-                              TextSpan(
-                                text: 'and ',
-                                style: Theme.of(context).textTheme.bodySmall
-                              ),
-                              TextSpan(
-                                text: 'Privacy Policy',
-                                style: Theme.of(context).textTheme.headlineSmall
+                      const SizedBox(height: 20,),
+                      CustomForm(
+                        tag: 'Password', 
+                        hint:  '********',
+                        prefixIcon: Icon(Icons.lock_outline),
+                        icon: IconButton(
+                          onPressed: () {}, 
+                          icon: Icon(Icons.visibility_outlined)
+                        ),
+                        tagButton: () {
+                          //
+                        },
+                        actionText: login ? 'Forget Password?' : '',
+                        controller: controller.passwordController,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Password is required';
+                          }
+                          if (value.length < 8) {
+                            return 'Password must be atleast 8 character';
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: 20,),  
+                      Row(
+                        children: [
+                          Checkbox(
+                            value: controller.acceptTerms.value,               
+                            onChanged: (value) {
+                              controller.acceptTerms.value = value ?? false;
+                            },
+                          ),
+                          login ? Text('Keep me signed in') : Expanded(
+                            child: RichText(
+                              text: TextSpan(
+                              text: 'I agree to the ',
+                                style: Theme.of(context).textTheme.bodySmall,
+                                children: [
+                                  TextSpan(
+                                    text: 'Terms of Services ',
+                                    style: Theme.of(context).textTheme.headlineSmall
+                                  ),
+                                  TextSpan(
+                                    text: 'and ',
+                                    style: Theme.of(context).textTheme.bodySmall
+                                  ),
+                                  TextSpan(
+                                    text: 'Privacy Policy',
+                                    style: Theme.of(context).textTheme.headlineSmall
+                                  )
+                                ]
                               )
-                            ]
+                            ),
+                          )
+                        ],
+                      ),
+                      const SizedBox(height: 15,),
+                      Container(
+                        width: double.infinity,
+                        padding: EdgeInsets.symmetric(vertical: 5),
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.primary,
+                          borderRadius: BorderRadius.circular(10)
+                        ),
+                        child: TextButton(            
+                          onPressed: () {}, 
+                          child: Text(
+                            login ? 'Sign In' : 'Create Account',
+                            style: Theme.of(context).textTheme.displayMedium,
                           )
                         ),
+                      ), 
+                      const SizedBox(height: 30,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            login ? 'Doesn\'t have an account?' : 'Already have an account?'
+                          ),
+                          TextButton(
+                            onPressed: controller.changeAuthMode, 
+                            child: controller.isLoading.value ? CircularProgressIndicator() : Text(
+                              login ? 'Create Account' : 'Log In'
+                            )
+                          )
+                        ],
                       )
-                    ],
-                  ),
-                  const SizedBox(height: 15,),
-                  Container(
-                    width: double.infinity,
-                    padding: EdgeInsets.symmetric(vertical: 5),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.primary,
-                      borderRadius: BorderRadius.circular(10)
-                    ),
-                    child: TextButton(            
-                      onPressed: () {}, 
-                      child: Text(
-                        'Create Account',
-                        style: Theme.of(context).textTheme.displayMedium,
-                      )
-                    ),
-                  ), 
-                  const SizedBox(height: 30,),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Already have an account?'
-                      ),
-                      TextButton(
-                        onPressed: () {}, 
-                        child: Text(
-                          'Log In'
-                        )
-                      )
-                    ],
-                  )
+                      ],
+                    )
+                  ) 
                 ],
               ),
-            ),
+            );
+            })
+            
+            
           ),
         ),
       )

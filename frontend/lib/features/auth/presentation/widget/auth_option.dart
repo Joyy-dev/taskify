@@ -56,7 +56,7 @@ class AuthOption extends StatelessWidget {
             ),
             const SizedBox(width: 10,),
             Text(
-              'Or Email'.toUpperCase(),
+              'Or Continue With Email'.toUpperCase(),
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             const SizedBox(width: 10,),

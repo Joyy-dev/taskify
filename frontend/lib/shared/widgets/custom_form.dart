@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 class CustomForm extends StatelessWidget {
   final String? hint;
   final String tag;
+  final String? actionText;
+  final VoidCallback? tagButton;
   final IconButton? icon;
   final Widget? prefixIcon;
   final int? line;
@@ -13,6 +15,8 @@ class CustomForm extends StatelessWidget {
     this.hint,
     required this.tag,
     this.icon,
+    this.actionText,
+    this.tagButton,
     this.prefixIcon,
     this.line,
     required this.controller,
@@ -25,9 +29,21 @@ class CustomForm extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          tag.toUpperCase(),
-          style: Theme.of(context).textTheme.headlineSmall,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              tag.toUpperCase(),
+              style: Theme.of(context).textTheme.headlineSmall,
+            ),
+            if (actionText != null)
+            TextButton(
+              onPressed: tagButton, 
+              child: Text(
+                actionText!
+              )
+            )
+          ],
         ),
         const SizedBox(height: 5,),
         Card(

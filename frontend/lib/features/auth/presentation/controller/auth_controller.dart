@@ -5,7 +5,10 @@ class AuthController extends GetxController{
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  final bool isLogin = false;
+  final formKey = GlobalKey<FormState>();
+  final isLogin = true.obs;
+  final acceptTerms = false.obs;
+  final isLoading = false.obs;
 
   @override
   void onClose() {
@@ -13,5 +16,9 @@ class AuthController extends GetxController{
     emailController.dispose();
     passwordController.dispose();
     super.onClose();
+  }
+
+  void changeAuthMode() {
+    isLogin.toggle();
   }
 }
