@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:taskify/features/auth/presentation/screens/auth_screens.dart';
 import 'package:taskify/shared/controllers/navigation_controllers.dart';
 import 'package:taskify/features/tasks/presentation/screens/home_screens.dart';
 import 'package:taskify/features/settings/presentation/screens/settings_screens.dart';
@@ -18,7 +17,6 @@ class _NavigationState extends State<Navigation> {
   final controller = Get.put(NavigationControllers());
 
   final List<Widget> _screens = [
-    AuthScreens(),
     HomeScreens(),
     TaskListScreen(),
     TeamScreens(),
@@ -32,10 +30,6 @@ class _NavigationState extends State<Navigation> {
         currentIndex: controller.selectedIndex.value,
         onTap: controller.changeIndex,
         items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.app_registration),
-            label: 'Auth'
-          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.grid_view_rounded),
             label: 'Dashboard'

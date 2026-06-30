@@ -86,13 +86,15 @@ class AuthScreens extends StatelessWidget {
                         hint:  '********',
                         prefixIcon: Icon(Icons.lock_outline),
                         icon: IconButton(
-                          onPressed: () {}, 
-                          icon: Icon(Icons.visibility_outlined)
+                          onPressed: controller.toggleIcon, 
+                          icon: controller.obscurePassword.value ? Icon(Icons.visibility_off_outlined) : Icon(Icons.visibility_outlined)
                         ),
                         tagButton: () {
                           //
                         },
+                        obscureText: controller.obscurePassword.value,
                         actionText: login ? 'Forget Password?' : '',
+                        line: 1,
                         controller: controller.passwordController,
                         validator: (value) {
                           if (value == null || value.isEmpty) {

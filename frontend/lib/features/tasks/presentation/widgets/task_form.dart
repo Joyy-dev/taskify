@@ -75,6 +75,7 @@ class TaskForm extends StatelessWidget {
                 child: CustomForm(
                   tag: 'Due Date',
                   hint: 'mm/dd/yy',
+                  readOnly: true,
                   controller: controller.dueDateController,
                   icon: IconButton(
                     onPressed: () => controller.datePicker(context), 
@@ -86,6 +87,7 @@ class TaskForm extends StatelessWidget {
                 child: CustomForm(
                   tag: 'Due Time',
                   hint: 'Select time',
+                  readOnly: true,
                   controller: controller.dueTimeController,
                   icon: IconButton(
                     onPressed: () => controller.selectReminderTime(context), 

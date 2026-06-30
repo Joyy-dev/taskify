@@ -10,6 +10,8 @@ class CustomForm extends StatelessWidget {
   final int? line;
   final TextEditingController controller;
   final String? Function(String?)? validator;
+  final bool obscureText;
+  final bool readOnly;
 
   const CustomForm({
     this.hint,
@@ -21,6 +23,8 @@ class CustomForm extends StatelessWidget {
     this.line,
     required this.controller,
     this.validator,
+    this.obscureText = false,
+    this.readOnly = false,
     super.key
   });
 
@@ -49,7 +53,8 @@ class CustomForm extends StatelessWidget {
         Card(
           child: TextFormField(
             controller: controller,
-            readOnly: icon != null,
+            readOnly: readOnly,
+            obscureText: obscureText,
             keyboardType: TextInputType.multiline,
             maxLines: line,
             validator: validator,

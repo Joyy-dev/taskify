@@ -9,6 +9,7 @@ class AuthController extends GetxController{
   final isLogin = true.obs;
   final acceptTerms = false.obs;
   final isLoading = false.obs;
+  final obscurePassword = true.obs;
 
   @override
   void onClose() {
@@ -20,5 +21,9 @@ class AuthController extends GetxController{
 
   void changeAuthMode() {
     isLogin.toggle();
+  }
+
+  void toggleIcon() {
+    obscurePassword.toggle();
   }
 }
