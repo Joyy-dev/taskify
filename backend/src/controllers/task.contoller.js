@@ -19,16 +19,96 @@ async function createTask(req, res) {
         })
 
     } catch (e) {
-        if (e.message === 'Title is required') {
-
-            return res.status(400).json({
-                success: false,
-                message: e.message
-            })
-        }
+        return res.status(400).json({
+            success: false,
+            message: e.message
+        })
     }
 }
 
+async function getUserTasks(req, res) {
+    try {
+        const getUserTask = await taskService.getUserTasks(req.user.id);
+
+        return res.status(200).json({
+            success: true,
+            message: 'Task successfully retrieved',
+            data: getUserTask
+        })
+
+    } catch(e) {
+        return res.status(400).json({
+            success: false,
+            message: e.message
+        })
+    } 
+}
+
+async function getTask(req, res) {
+    try {
+        const getTask = await taskService.getTaskById(
+            Number(req.params.id),
+            req.user.id
+        );
+
+        return res.status(200).json({
+            success: true,
+            message: 'Task successfully retrieved',
+            data: getTask
+        })
+    } catch(e) {
+        return res.status(400).json({
+            success: false,
+            message: e.message
+        })
+    }
+}
+
+async function updateTask(req, res) {
+    try {
+        const updateTask = await taskService.updateTask(
+            Number(req.params.id),
+            req.user.id,
+            req.body
+        );
+
+        return res.status(200).json({
+            success: true,
+            message: 'Task successfuly updated',
+            data: updateTask
+        });
+    } catch(e) {
+        return res.status(400).json({
+            success: false,
+            message: e.message
+        })
+    }
+}
+
+async function deleteTask(req, res) {
+    try {
+        const deleteTask = await taskService.deleteTask(
+            Number(req.params.id),
+            req.user.id
+        );
+
+        return res.status(200).json({
+            success: true,
+            message: 'Task successfully deleted'
+        });
+    } catch(e) {
+        return res.status(400).json({
+            success: false,
+            message: e.message
+        })
+    }
+    
+}
+
 module.exports = {
-    createTask
+    createTask,
+    getUserTasks,
+    getTask,
+    updateTask,
+    deleteTask
 }

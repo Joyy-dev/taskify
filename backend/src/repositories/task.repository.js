@@ -17,6 +17,30 @@ class TaskRepository {
         tasks.push(newTask);
         return newTask;
     }
+
+    async update(id, updates) {
+        const taskIndex = tasks.findIndex(task => task.id === id);
+
+        if (taskIndex === -1) {
+            return null;
+        }
+
+        tasks[taskIndex] = {
+            ...tasks[taskIndex], 
+            ...updates 
+        };
+        return tasks[taskIndex];
+    }
+
+    async delete(id) {
+        const taskIndex = tasks.findIndex(task => task.id === id);
+
+        if (taskIndex === -1) {
+            return null;
+        }
+
+        return tasks.splice(taskIndex, 1)[0];
+    }
 }
 
 module.exports = new TaskRepository();
