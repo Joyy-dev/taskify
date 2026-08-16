@@ -1,18 +1,31 @@
-const users = [];
+const pool = require("../config/database");
 
 class UserRepository {
-    
     async findByEmail(email) {
-        return users.find(user => user.email === email) ?? null;
+        const result = await pool.query(
+            `
+            SELECT *
+            FROM users
+            WHERE email = $1
+            `,
+            [email]
+        );
+        return result.rows[0] ?? null;
     }
 
     async create(user) {
-        const newUser = {
-            id: users.length + 1,
-            ...user,
-        };
-        users.push(newUser);
-        return newUser;
+        const { name, email, password } = user
+
+        const result = await pool.query(
+            `
+            INSERT INTO users(name, email, password)
+            VALUES($1, $2, $3)
+            RETURNING *;
+            `,
+            [name, email, password]
+        );
+
+        return result.rows[0];
     }
 }
 

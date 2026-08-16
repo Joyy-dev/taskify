@@ -87,7 +87,7 @@ async function updateTask(req, res) {
 
 async function deleteTask(req, res) {
     try {
-        const deleteTask = await taskService.deleteTask(
+        await taskService.deleteTask(
             Number(req.params.id),
             req.user.id
         );

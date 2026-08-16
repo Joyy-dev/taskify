@@ -18,6 +18,25 @@ async function register(req, res) {
     }
 }
 
+async function login(req, res) {
+    try {
+        const userData = req.body;
+
+        const user = await authService.login(userData);
+        return res.status(200).json({
+            success: true,
+            message: 'Login successful!',
+            data: user
+        });
+    } catch (e) {
+        return res.status(401).json({
+            success: false,
+            message: e.message
+        });
+    }
+    
+}
+
 async function welcome(req, res) {
     res.status(200).json({
         success: true,
@@ -27,5 +46,6 @@ async function welcome(req, res) {
 
 module.exports = {
     register,
+    login,
     welcome
 };

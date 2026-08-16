@@ -2,7 +2,17 @@ const userRepository = require("../repositories/user.repository");
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt')
 
+
+
 class AuthService {
+    buildUserResponse(user) {
+        return {
+            id: user.id,
+            name: user.name,
+            email: user.email
+        };
+    }
+
     async register({name, email, password}) {
         const existingUser = await userRepository.findByEmail(email);
 
@@ -19,14 +29,8 @@ class AuthService {
         };
 
         const createdUser = await userRepository.create(newUser);
-        
-        const userResponse = {
-            id: createdUser.id,
-            name: createdUser.name,
-            email: createdUser.email
-        };
 
-        return userResponse;
+        return this.buildUserResponse(createdUser);
     }
 
     async login({ email, password }) {
@@ -53,17 +57,11 @@ class AuthService {
         const token = jwt.sign(
             payload,
             process.env.JWT_SECRET,
-            {expiresIn: process.env.JWT_EXPRIES_IN}
+            {expiresIn: process.env.JWT_EXPIRES_IN}
         );
 
-        const userResponse = {
-            id: user.id,
-            name: user.name,
-            email: user.email,
-        };
-
         return {
-            user: userResponse,
+            user: this.buildUserResponse(user),
             token
         };
     }
