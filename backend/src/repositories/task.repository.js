@@ -1,6 +1,20 @@
 const pool = require("../config/database");
 
 class TaskRepository {
+
+    _mapTask(row) {
+        return {
+            id: row.id,
+            userId: row.user_id,
+            title: row.title,
+            description: row.description,
+            priority: row.priority,
+            dueDate: row.due_date,
+            completed: row.completed,
+            createdAt: row.created_at
+        };
+    }
+
     async findById(id) {
         const result = await pool.query(
             `
@@ -10,7 +24,7 @@ class TaskRepository {
             `,
             [id]
         )
-        return result.rows[0] ?? null;
+        return result.rows[0] ? this._mapTask(result.rows[0]) : null;
     }
 
     async findByUserId(userId) {
@@ -22,19 +36,19 @@ class TaskRepository {
             `,
             [userId]
         )
-        return result.rows
+        return result.rows.map(row => this._mapTask(row));
     }
 
     async create(task) {
         const newTask = await pool.query(
             `
-            INSERT INTO tasks(user_id, title, description, priority, due_date, completed)
-            VALUES($1, $2, $3, $4, $5, $6)
+            INSERT INTO tasks(user_id, title, description, due_date, completed)
+            VALUES($1, $2, $3, $4, $5)
             RETURNING *;
             `,
-            [task.userId, task.title, task.description, task.priority, task.dueDate, task.completed]
+            [task.userId, task.title, task.description, task.dueDate, task.completed]
         )
-        return newTask.rows[0];
+        return this._mapTask(newTask.rows[0]);
     }
 
     async update(id, updates) {
@@ -50,15 +64,13 @@ class TaskRepository {
             (key) => allowedFields[key]
         );
         
-        if (fields.length === 0) {
-            return null;
-        }
-        
-        const setClause = Object.keys(updates).map(
-            (key, index) => `${key} = $${index + 1}`
+        const setClause = fields.map(
+            (key, index) => `${allowedFields[key]} = $${index + 1}`
         );
 
-        const values = Object.values(updates);
+        const values = fields.map(
+            key => updates[key]
+        );
         
 
         values.push(id);
@@ -73,7 +85,7 @@ class TaskRepository {
             values
         )
 
-        return result.rows[0] ?? null;
+        return result.rows[0] ? this._mapTask(result.rows[0]) : null;
     }
 
     async delete(id) {
@@ -86,7 +98,7 @@ class TaskRepository {
             [id]
         )
 
-        return result.rows[0] ?? null;
+        return result.rows[0] ? this._mapTask(result.rows[0]) : null;
     }
 }
 
