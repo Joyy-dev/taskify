@@ -42,11 +42,11 @@ class TaskRepository {
     async create(task) {
         const newTask = await pool.query(
             `
-            INSERT INTO tasks(user_id, title, description, due_date, completed)
-            VALUES($1, $2, $3, $4, $5)
+            INSERT INTO tasks(user_id, title, description, due_date)
+            VALUES($1, $2, $3, $4)
             RETURNING *;
             `,
-            [task.userId, task.title, task.description, task.dueDate, task.completed]
+            [task.userId, task.title, task.description, task.dueDate]
         )
         return this._mapTask(newTask.rows[0]);
     }
