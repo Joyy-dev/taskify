@@ -19,7 +19,6 @@ The backend is a RESTful API built with Node.js and Express, designed for securi
 
 - **Runtime**: [Node.js](https://nodejs.org/)
 - **Framework**: [Express](https://expressjs.com/)
-- **Database ORM**: [Prisma](https://www.prisma.io/)
 - **Database Engine**: PostgreSQL (`pg`)
 - **Authentication**: JWT (`jsonwebtoken`) and `bcrypt` for password hashing
 - **Security & Logging**: `helmet`, `cors`, `morgan`
@@ -31,7 +30,7 @@ This is a monorepo containing both the frontend and the backend applications:
 
 ```text
 taskify/
-├── backend/    # Node.js Express server + Prisma API
+├── backend/    # Node.js Express server API
 └── frontend/   # Flutter mobile application
 ```
 
@@ -54,17 +53,13 @@ taskify/
    ```
 3. Set up your environment variables:
    Create a `.env` file in the `backend` directory based on your configuration. You'll need at least `DATABASE_URL` and JWT secrets.
-4. Run Prisma migrations:
-   ```bash
-   npx prisma migrate dev
-   ```
-5. Start the development server:
+4. Start the development server:
    ```bash
    npm run dev
    ```
    *(Note: ensure you have a `dev` script in your `package.json` utilizing `nodemon`, or run `npx nodemon src/server.js`)*
 
-### Frontend Setup
+### Frontend Setup 
 
 1. Navigate to the frontend directory:
    ```bash
