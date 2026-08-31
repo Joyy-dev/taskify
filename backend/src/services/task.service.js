@@ -9,15 +9,14 @@ const PRIORITIES = [
 class TaskService {
     async createTask(taskData) {
         this.validateTitle(taskData.title);
-        this.validatePriority(taskData.priority);
+        
+        if (taskData.priority != undefined) {
+            taskData.priority = this.validatePriority(taskData.priority);
+        }
+
         this.validateDueDate(taskData.dueDate);
 
-        const task = {
-            ...taskData,
-            completed: false,
-        };
-
-        return await taskRepository.create(task);
+        return await taskRepository.create(taskData);
     }
 
     validateTitle(title) {
@@ -33,15 +32,29 @@ class TaskService {
         if(!PRIORITIES.includes(normalizedPriority)) {
             throw new Error('Priority must be low, medium, or high');
         }
+
+        return normalizedPriority;
     }
 
     validateDueDate(dueDate) {
         if (!dueDate ) {
-            return;
+            throw new Error('Due date is required');
         }
 
-        if(new Date(dueDate) < new Date()) {
+        const date = new Date(dueDate)
+
+        if (Number.isNaN(date.getTime())) {
+            throw new Error('Invalid due date')
+        }
+
+        if( date < new Date()) {
             throw new Error('Due date cannot be in the past');
+        }
+    }
+
+    validateCompleted(completed) {
+        if (typeof completed !== 'boolean') {
+            throw new Error('Completed must be true or false');
         }
     }
 
@@ -65,6 +78,13 @@ class TaskService {
 
     async updateTask(taskId, userId, updates) {
         const task = await taskRepository.findById(taskId);
+        const allowedUpdates = [
+            'title',
+            'description',
+            'priority',
+            'dueDate',
+            'completed'
+        ];
 
         if (!task) {
             throw new Error('Task not found');
@@ -74,19 +94,34 @@ class TaskService {
             throw new Error('Forbidden');
         }
 
-        if (updates.title !== undefined) {
-            this.validateTitle(updates.title);
-        }
+        const cleanUpdates = Object.keys(updates).filter(
+            key => allowedUpdates.includes(key)).reduce((obj, key) => {
+                obj[key] = updates[key];
+                return obj;
+            }, {});
 
-        if (updates.priority !== undefined) {
-            this.validatePriority(updates.priority);
-        }
+            if (Object.keys(cleanUpdates).length === 0) {
+                throw new Error('No valid fields provided for update')
+            }
 
-        if (updates.dueDate !== undefined) {
-            this.validateDueDate(updates.dueDate);
-        }
+            
+            if (cleanUpdates.title !== undefined) {
+                this.validateTitle(cleanUpdates.title);
+            }
+
+            if (cleanUpdates.priority !== undefined) {
+                cleanUpdates.priority = this.validatePriority(cleanUpdates.priority);
+            }
+
+            if (cleanUpdates.dueDate !== undefined) {
+                this.validateDueDate(cleanUpdates.dueDate);
+            }
+
+            if (cleanUpdates.completed !== undefined) {
+                this.validateCompleted(cleanUpdates.completed);
+            }
         
-        return await taskRepository.update(taskId, updates);
+        return await taskRepository.update(taskId, cleanUpdates);
     }
 
     async deleteTask(taskId, userId) {

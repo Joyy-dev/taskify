@@ -40,15 +40,40 @@ class TaskRepository {
     }
 
     async create(task) {
-        const newTask = await pool.query(
+        const allowedFields = {
+            userId: 'user_id',
+            title: 'title',
+            description: 'description',
+            priority: 'priority',
+            dueDate: 'due_date',
+        }
+
+        const fields = Object.keys(task).filter(
+            (key) => allowedFields[key] && task[key] !== undefined
+        );
+
+        const columns = fields.map(
+            (key) => allowedFields[key]
+        );
+
+        const values = fields.map(
+            (key) => task[key]
+        );
+
+        const placeholders = fields.map(
+            (_, index) => `$${index + 1}`
+        );
+
+
+        const result = await pool.query(
             `
-            INSERT INTO tasks(user_id, title, description, due_date)
-            VALUES($1, $2, $3, $4)
+            INSERT INTO tasks (${columns.join(', ')})
+            VALUES (${placeholders.join(', ')})
             RETURNING *;
             `,
-            [task.userId, task.title, task.description, task.dueDate]
+            values
         )
-        return this._mapTask(newTask.rows[0]);
+        return this._mapTask(result.rows[0]);
     }
 
     async update(id, updates) {
