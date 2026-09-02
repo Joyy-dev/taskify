@@ -25,4 +25,29 @@ class TaskModel {
     required this.priority,
     List<SubtaskModel>? subTask,
   }) : subTask = subTask ?? [];
+
+  Map<String, dynamic> toJson() {
+    return {
+      'title': taskTitle,
+      'description': description,
+      'priority': priority.name,
+      'dueDate': dueDate.toIso8601String()
+    };
+  }
+
+  factory TaskModel.fromJson(Map<String, dynamic> json) {
+    return TaskModel(
+      id: json['id'].toString(),
+      taskTitle: json['title'],
+      category: Category.work,
+      description: json['description'],
+      dueDate: DateTime.parse(json['dueDate']),
+      isCompleted: json['completed'] ?? false,
+      reminderTime: const TimeOfDay(hour: 0, minute: 0),
+      priority: PriorityLevels.values.firstWhere(
+        (priority) => priority.name == json['priority']
+      ) 
+    );
+ }
 }
+
