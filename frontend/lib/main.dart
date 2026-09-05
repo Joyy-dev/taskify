@@ -6,9 +6,10 @@ import 'package:taskify/app/themes/app_theme.dart';
 import 'package:taskify/features/auth/presentation/controller/auth_controller.dart';
 import 'package:taskify/features/auth/presentation/screens/auth_screens.dart';
 import 'package:taskify/features/search/presentation/controllers/search_controllers.dart';
-import 'package:taskify/features/tasks/presentation/controllers/task_controllers.dart';
+import 'package:taskify/features/tasks/bindings/task_binding.dart';
 import 'package:taskify/features/tasks/presentation/controllers/task_detail_controllers.dart';
 import 'package:taskify/features/tasks/presentation/controllers/task_form_controllers.dart';
+import 'package:taskify/features/tasks/presentation/screens/task_list_screen.dart';
 import 'package:taskify/shared/controllers/theme_controllers.dart';
 
 void main() async {
@@ -18,7 +19,7 @@ void main() async {
   // final box = GetStorage();
   // box.erase();
   Get.put(ThemeControllers());
-  Get.put(TaskControllers());
+  TaskBinding().dependencies();
   Get.put(TaskDetailControllers());
   Get.put(TaskFormControllers());
   Get.put(SearchControllers());
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
       theme: AppTheme.lightMode,
       themeMode: ThemeMode.system,
       darkTheme: AppTheme.darkMode,
-      home: AuthScreens(),
+      home: TaskListScreen(),
     );
   }
 }

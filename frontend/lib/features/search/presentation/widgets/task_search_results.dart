@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:taskify/core/enums/category.dart';
-import 'package:taskify/core/services/category_color.dart';
+import 'package:taskify/core/constants/category_color.dart';
 import 'package:taskify/features/search/presentation/controllers/search_controllers.dart';
 import 'package:taskify/shared/widgets/custom_container.dart';
-//import 'package:taskify/presentation/widget/special_container.dart';
 
 class TaskSearchResults extends StatelessWidget {
   const TaskSearchResults({super.key});

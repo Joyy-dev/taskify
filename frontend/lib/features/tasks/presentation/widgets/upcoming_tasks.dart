@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:taskify/core/services/category_color.dart';
+import 'package:taskify/core/constants/category_color.dart';
 import 'package:taskify/features/tasks/presentation/controllers/task_controllers.dart';
 import 'package:taskify/features/tasks/presentation/controllers/task_detail_controllers.dart';
 import 'package:taskify/features/tasks/presentation/screens/task_detail_screens.dart';

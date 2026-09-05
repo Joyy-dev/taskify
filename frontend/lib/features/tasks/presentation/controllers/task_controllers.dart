@@ -2,15 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:taskify/core/enums/category.dart';
-import 'package:taskify/core/enums/priority_levels.dart';
 import 'package:taskify/features/notifications/data/model/notification_model.dart';
-import 'package:taskify/features/tasks/data/models/subtask_model.dart';
 import 'package:taskify/features/tasks/data/models/task_model.dart';
+import 'package:taskify/features/tasks/data/repositories/task_repository.dart';
 
 class TaskControllers extends GetxController{
+  final TaskRepository taskRepository;
+
+  TaskControllers({required this.taskRepository});
+
   var tasks = <TaskModel>[].obs;
   final box = GetStorage();
   final notification = <NotificationModel>[].obs;
+  var isLoading = false.obs;
+  var errorMessage = ''.obs;
 
   @override
   void onInit() {
@@ -38,21 +43,19 @@ class TaskControllers extends GetxController{
     }).toList());
   }
 
-  void loadTasks() {
-    final data = box.read('tasks');
-    if (data != null) {
-      tasks.value = List<Map<String, dynamic>>.from(data).map((e) => TaskModel(
-        id: e['id'], 
-        taskTitle: e['title'], 
-        category: Category.values.firstWhere((c) => c.name == e['category']), 
-        description: e['description'], 
-        dueDate: DateTime.parse(e['dueDate']),
-        isCompleted: e['completed'] ?? false, 
-        subTask: List<Map<String, dynamic>>.from(e['subTask'] ?? []).map((s) => SubtaskModel.fromJson(s)).toList(),
-        priority: PriorityLevels.values.firstWhere((p) => p.name == e['priority']),
-        reminderTime: TimeOfDay(hour: e['reminderHour'], minute: e['reminderMinute'])
-      )).toList();
+  Future<void> loadTasks() async {
+    isLoading.value = true;
+    errorMessage.value = '';
+    try {
+      final loadedTasks = await taskRepository.getTasks();
+      tasks.value = loadedTasks;
+
+    } catch (e) {
+      errorMessage.value = e.toString();
+    } finally {
+      isLoading.value = false;
     }
+    
   }
 
   void updateTask(TaskModel updatedTask) {

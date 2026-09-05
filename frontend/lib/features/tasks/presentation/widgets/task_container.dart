@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:taskify/core/enums/priority_levels.dart';
-import 'package:taskify/core/services/category_color.dart';
+import 'package:taskify/core/constants/category_color.dart';
 
 class TaskContainer extends StatelessWidget {
   final Widget child;
