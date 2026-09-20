@@ -1,4 +1,3 @@
-
 import 'package:taskify/core/services/api_service.dart';
 import 'package:taskify/features/tasks/data/models/task_model.dart';
 
@@ -12,6 +11,8 @@ class TaskRepository {
 
     final data = response.data['data'];
 
-    return data.map<TaskModel>((json) => TaskModel.fromJson(json)).toList();
+    return data
+        .map<TaskModel>((json) => TaskModel.fromJson(json))
+        .toList();
   }
 }

@@ -5,7 +5,7 @@ class ApiService {
 
   ApiService() : dio = Dio(
     BaseOptions(
-      baseUrl: 'https://localhost:5000',
+      baseUrl: 'http://10.0.2.2:5000',
     )
   );
 

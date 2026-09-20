@@ -9,7 +9,6 @@ import 'package:taskify/features/search/presentation/controllers/search_controll
 import 'package:taskify/features/tasks/bindings/task_binding.dart';
 import 'package:taskify/features/tasks/presentation/controllers/task_detail_controllers.dart';
 import 'package:taskify/features/tasks/presentation/controllers/task_form_controllers.dart';
-import 'package:taskify/features/tasks/presentation/screens/task_list_screen.dart';
 import 'package:taskify/shared/controllers/theme_controllers.dart';
 
 void main() async {
@@ -37,7 +36,7 @@ class MyApp extends StatelessWidget {
       theme: AppTheme.lightMode,
       themeMode: ThemeMode.system,
       darkTheme: AppTheme.darkMode,
-      home: TaskListScreen(),
+      home: AuthScreens(),
     );
   }
 }
