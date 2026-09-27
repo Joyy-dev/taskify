@@ -16,3 +16,24 @@ class TaskRepository {
         .toList();
   }
 }
+
+// import 'package:flutter/foundation.dart';
+
+
+// Future<List<TaskModel>> getTasks() async {
+//   try {
+//     final response = await apiService.get('/tasks');
+
+//     debugPrint('STATUS CODE: ${response.statusCode}');
+//     debugPrint('RESPONSE DATA: ${response.data}');
+
+//     final List<dynamic> data = response.data;
+
+//     return data
+//         .map((json) => TaskModel.fromJson(json))
+//         .toList();
+//   } catch (e) {
+//     debugPrint('REPOSITORY ERROR: $e');
+//     rethrow;
+//   }
+// }
