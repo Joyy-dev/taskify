@@ -24,8 +24,7 @@ class AppColor {
   static const Color darkSurfaceSubtle = Color(0xFF24263D);
   static const Color darkTextPrimary = Color(0xFFF7F7FC);
   static const Color darkTextSecondary = Color(0xFFF6F7FB);
-  static const Color darkBorder = Color(0xFFE9EAF2);
-  static const Color success = Color(0xFF20A56B);
-  static const Color warning = Color(0xFFE59A28);
+  static const Color darkBorder = Color(0xFF393B59);
+  static const Color darkSuccess = Color(0xFF20A56B);
 
 }
